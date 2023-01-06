@@ -1,3 +1,13 @@
+SoulMeter by AFNGP
+
+
+This program allows to capture damage information in SW using network packets (WinDivert).
+
+Currently supports JP version, support for other versions might be added in the future.
+
+Info from previous repos
+---
+
 靈魂行者Steam版本傷害計算器
 ---
 
