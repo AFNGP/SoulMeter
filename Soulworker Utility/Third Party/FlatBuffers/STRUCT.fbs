@@ -1,0 +1,17 @@
+namespace SoulMeterFBS.History;
+
+table _tIntDoubleList {
+  _f:uint;
+  _s:[double];
+}
+
+struct _sTime {
+    year:ushort;
+    month:ushort;
+    day_of_week:ushort;
+    day:ushort;
+    hour:ushort;
+    minute:ushort;
+    second:ushort;
+    milliseconds:ushort;
+}
