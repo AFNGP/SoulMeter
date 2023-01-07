@@ -4,6 +4,7 @@
 
 - Removed npcap support
 - Changed base to JP (with possibility of adding KR/GLB at some point)
+- Added support for Global and KR
 - Added Dhana support
 - Updated Database with Dhana skills
 
