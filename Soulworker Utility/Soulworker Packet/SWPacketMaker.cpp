@@ -75,11 +75,11 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 
 			/*0x03*/
 		case RecvOPcode::STATCHANGE: //0430
-			opcode = "statchange";
+			opcode = "STATCHANGE";
 			swpacket = new SWPacketStatChange(swheader, data);
 			break;
 		case RecvOPcode::DEAD:
-			opcode = "dead";
+			opcode = "DEAD";
 			swpacket = new SWPacketDead(swheader, data);
 			break;
 		case RecvOPcode::CHARACTER_UPDATE_SPECIAL_OPTION_LIST:
@@ -90,42 +90,42 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 			/*0x04*/
 			// eSUB_CMD_WORLD_ENTER_RES
 		case RecvOPcode::WORLDCHANGE: //0430
-			opcode = "world change";
+			opcode = "WORLDCHANGE";
 			swpacket = new SWPacketWorldChange(swheader, data);
 			break;
 		case RecvOPcode::MAZESTART:
-			opcode = "maze start";
+			opcode = "MAZESTART";
 			swpacket = new SWPacketMazeStart(swheader, data);
 			break;
 		case RecvOPcode::SPAWNED_CHARINFO:
-			opcode = "spawned char info";
+			opcode = "SPAWNED_CHARINFO";
 			//swpacket = new SWPacketSpawnedCharInfo(swheader, data);
 			break;
 		case RecvOPcode::IN_INFO_MONSTER: //0605
-			opcode = "in info monster";
+			opcode = "IN_INFO_MONSTER";
 			swpacket = new SWPacketInInfoMonster(swheader, data);
 			break;
 		case RecvOPcode::OTHER_INFOS_MONSTER:
-			opcode = "other infos monster";
+			opcode = "OTHER_INFOS_MONSTER";
 			swpacket = new SWPacketOtherInfosMonster(swheader, data);
 			break;
 
 			/*0x05*/
 		case RecvOPcode::STARTMOVE:
-			opcode = "startmove";
+			opcode = "STARTMOVE";
 			//swpacket = new SWPacketStartMove(swheader, data);
 			break;
 		case RecvOPcode::STOPMOVE:
-			opcode = "stopmove";
+			opcode = "STOPMOVE";
 			break;
 		case RecvOPcode::JUMP:
-			opcode = "jump";
+			opcode = "JUMP";
 			break;
 		case RecvOPcode::CANCEL_WITHMOVE:
-			opcode = "cancel withmove";
+			opcode = "CANCEL_WITHMOVE";
 			break;
 		case RecvOPcode::ENTER_ANIMATION:
-			opcode = "enter animation";
+			opcode = "ENTER_ANIMATION";
 			swpacket = new SWPacketEnterAnimation(swheader, data);
 			break;
 
@@ -133,87 +133,87 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 		//case RecvOPcode::EVADE:
 		//	break;
 		case RecvOPcode::USESKILL:
-			opcode = "useskill";
+			opcode = "USESKIL:";
 			//swpacket = new SWPacketUseSkill(swheader, data);
 			break;
 		case RecvOPcode::OTHER_USESKILL: //0430
-			opcode = "other_useskill";
+			opcode = "OTHER_USESKILL";
 			swpacket = new SWPacketOtherUseSkill(swheader, data);
 			break;
 		case RecvOPcode::DAMAGE: //0430
-			opcode = "damage";
+			opcode = "DAMAGE";
 			swpacket = new SWPacketDamage(swheader, data);
 			break;
 		case RecvOPcode::BUFFIN: //0430
-			opcode = "buffin";
+			opcode = "BUFFIN";
 			swpacket = new SWPacketBuffIn(swheader, data);
 			break;
 		case RecvOPcode::BUFFOUT: //0430
-			opcode = "buffout";
+			opcode = "BUFFOUT";
 			swpacket = new SWPacketBuffOut(swheader, data);
 			break;
 		case RecvOPcode::PROJECTILE:
-			opcode = "projectile";
+			opcode = "PROJECTILE";
 			break;
 		case RecvOPcode::AKASIC:
-			opcode = "akasic";
+			opcode = "AKASIC";
 			swpacket = new SWPacketAkasic(swheader, data);
 			break;
 		case RecvOPcode::COOLDOWN: //0430
-			opcode = "cooldown";
+			opcode = "COOLDOWN";
 			swpacket = new SWPacketCooldown(swheader, data);
 			break;
 
 			/*0x07*/
 		case RecvOPcode::CHAT:
-			opcode = "chat";
+			opcode = "CHAT";
 			//swpacket = new SWPacketChat(swheader, data);
 			break;
 
 			/* 0x11 Maze*/
 		case RecvOPcode::MAZEEND:
-			opcode = "mazeend";
+			opcode = "MAZEEND";
 			swpacket = new SWPacketMazeEnd(swheader, data);
 			break;
 		case RecvOPcode::MAZE_UPDATE_STATE:
-			opcode = "maze update state";
+			opcode = "maze MAZE_UPDATE_STATE state";
 			swpacket = new SWPacketMazeUpdateState(swheader, data);
 			break;
 
 			/* 0x12 Party */
 		case RecvOPcode::PARTY: //1117
-			opcode = "party";
+			opcode = "PARTY";
 			swpacket = new SWPacketParty(swheader, data);
 			break;
 		case RecvOPcode::PARTY_LIST_INFO:
-			opcode = "part list info";
+			opcode = "PARTY_LIST_INFO";
 			//swpacket = new SWPacketPartyListInfo(swheader, data);
 			break;
 
 			/* 0x17 Monster */
 		case RecvOPcode::MONSTER_STAT_UPDATE:
-			opcode = "monster stat update";
+			opcode = "MONSTER_STAT_UPDATE";
 			swpacket = new SWPacketMonsterStatUpdate(swheader, data);
 			break;
 		case RecvOPcode::MONSTER_KILLED: //0430
-			opcode = "monster killed";
+			opcode = "MONSTER_KILLED";
 			swpacket = new SWPacketMonsterKilled(swheader, data);
 			break;
 		case RecvOPcode::AGGRO_CHANGED: //0430
-			opcode = "AGGRO CHANGED";
+			opcode = "AGGRO_CHANGED";
 			swpacket = new SWPacketAggroChanged(swheader, data);
 			break;
 
 			/* 0x23 Gesture*/
 		case RecvOPcode::GESTURE_USED:
-			opcode = "GESTURE USED";
+			opcode = "GESTURE_USED";
 			//swpacket = new SWPacketGestureUsed(swheader, data);
 			break;
 
 			/* 0x2e Force*/
 			// 8 players party
 		case RecvOPcode::BIG_PARTY: //1117
-			opcode = "BIG PARTY";
+			opcode = "BIG_PARTY";
 			swpacket = new SWPacketBigParty(swheader, data);
 			break;
 		
@@ -221,7 +221,6 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 		case RecvOPcode::SQUAD:
 			opcode = "SQUAD";
 			swpacket = new SWPacketSquad(swheader, data);
-			swpacket->Debug();
 			break;
 		
 
@@ -245,7 +244,9 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 #if DEBUG_RECV_CREATEPACKET == 1
 			swpacket->Debug();
 #endif
-
+			if (opcode == "SQUAD") {
+				swpacket->Debug();
+			}
 			// Todo
 			swpacket->Do();
 

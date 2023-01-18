@@ -74,20 +74,20 @@ VOID SWPacketSquad::Debug() {
 
 	UINT16 squadLeaderNickSize = 0;
 	memcpy(&squadLeaderNickSize, _data + offset, 2);
-	Log::WriteLogA("Found leader nick size of %16x (2 bytes)", squadLeaderNickSize);
+	Log::WriteLogA("Found leader nick size of %04x (2 bytes)", squadLeaderNickSize);
 
 	offset += 2; //SQUADLEADERNICKSIZE
 
-	Log::WriteLogA("At offset %zu", offset);
-	WCHAR utf16[MAX_NAME_LEN] = { 0 };
+	Log::WriteLogA("At offset %zu skip leader name for now", offset);
+	/*WCHAR utf16[MAX_NAME_LEN] = {0};
 	memcpy_s(utf16, MAX_NAME_LEN * sizeof(WCHAR), _data + offset, squadLeaderNickSize);
-	CHAR utf8[MAX_NAME_LEN] = { 0 };
+	CHAR utf8[MAX_NAME_LEN] = {0};
 	if (!UTF16toUTF8(utf16, utf8, MAX_NAME_LEN)) {
 		Log::WriteLogA("Failed to convert squad leader name");
 	}
 	else {
-		Log::WriteLogA("Squad leader name is %s (%16x bytes)", utf8, squadLeaderNickSize);
-	}
+		Log::WriteLogA("Squad leader name is %s (%04x bytes)", utf8, squadLeaderNickSize);
+	}*/
 
 	offset += squadLeaderNickSize; //SQUADLEADERNICK
 
@@ -98,7 +98,7 @@ VOID SWPacketSquad::Debug() {
 	Log::WriteLogA("At offset %zu", offset);
 	UINT8 squadPlayerCount = 0;
 	memcpy(&squadPlayerCount, _data + offset, 1);
-	Log::WriteLogA("Squad player count is %8x (1 byte)", squadPlayerCount);
+	Log::WriteLogA("Squad player count is %02x (1 byte)", squadPlayerCount);
 
 	offset += 1; //SQUADPLAYERCOUNT
 
@@ -109,14 +109,14 @@ VOID SWPacketSquad::Debug() {
 	for (int i = 0; i < squadPlayerCount; i++) {
 		UINT32 playerId = 0;
 		memcpy(&playerId, _data + offset, 4);
-		Log::WriteLogA("Found player ID %32x (4 bytes)", playerId);
+		Log::WriteLogA("Found player ID %08x (4 bytes)", playerId);
 
 		offset += 4; //PLAYERID
 		Log::WriteLogA("At offset %zu", offset);
 
 		UINT16 playerNickSize = 0;
 		memcpy(&playerNickSize, _data + offset, 2);
-		Log::WriteLogA("Found player nick size of %16x (2 bytes)", playerNickSize);
+		Log::WriteLogA("Found player nick size of %04x (2 bytes)", playerNickSize);
 
 		offset += 2; //PLAYERNICKSIZE
 		Log::WriteLogA("At offset %zu", offset);
@@ -129,7 +129,7 @@ VOID SWPacketSquad::Debug() {
 			Log::WriteLogA("Failed to convert player name");
 		}
 		else {
-			Log::WriteLogA("Player name is %s (%16x bytes)", utf8, playerNickSize);
+			Log::WriteLogA("Player name is %s", utf8);
 		}
 
 		offset += playerNickSize; //PLAYERNICK
@@ -141,7 +141,7 @@ VOID SWPacketSquad::Debug() {
 		Log::WriteLogA("At offset %zu", offset);
 		UINT8 playerJob = 0;
 		memcpy(&playerJob, _data + offset, 1);
-		Log::WriteLogA("Player job is %8x (1 byte)", playerJob);
+		Log::WriteLogA("Player job is %02x (1 byte)", playerJob);
 
 		offset += 1; //PLAYERJOB
 
