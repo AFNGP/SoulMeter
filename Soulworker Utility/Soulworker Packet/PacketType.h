@@ -58,6 +58,9 @@
 /* 0x2e */
 #include ".\Soulworker Packet\SWPacketBigParty.h"
 
+/* VP */
+#include ".\Soulworker Packet\SWPacketSquad.h"
+
 // SWSPacket
 #include ".\Soulworker Packet\SWSPacket.h"
 #include ".\Soulworker Packet\SWSPacketMySkillUsed.h"
@@ -121,6 +124,9 @@ enum RecvOPcode {
 
 	/* 0x2e */
 	BIG_PARTY = 0x2e09,
+
+	/* VP */
+	SQUAD = 0x1261
 };
 
 enum class SendOPCode

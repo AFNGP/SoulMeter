@@ -69,7 +69,7 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 		switch (_byteswap_ushort(swheader->_op)) {
 			/* 0x01*/
 		case RecvOPcode::HEARTBEAT: 
-			opcode = "heartbeat";
+			opcode = "HEARTBEAT";
 			swpacket = new SWPacketHeartbeat(swheader, data, packet->_ts);
 			break;
 
@@ -200,41 +200,52 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 			swpacket = new SWPacketMonsterKilled(swheader, data);
 			break;
 		case RecvOPcode::AGGRO_CHANGED: //0430
-			opcode = "aggro changed";
+			opcode = "AGGRO CHANGED";
 			swpacket = new SWPacketAggroChanged(swheader, data);
 			break;
 
 			/* 0x23 Gesture*/
 		case RecvOPcode::GESTURE_USED:
-			opcode = "gesture used";
+			opcode = "GESTURE USED";
 			//swpacket = new SWPacketGestureUsed(swheader, data);
 			break;
 
 			/* 0x2e Force*/
 			// 8 players party
 		case RecvOPcode::BIG_PARTY: //1117
-			opcode = "big party";
+			opcode = "BIG PARTY";
 			swpacket = new SWPacketBigParty(swheader, data);
 			break;
-
-
-
+		
+		
+		case RecvOPcode::SQUAD:
+			opcode = "SQUAD";
+			swpacket = new SWPacketSquad(swheader, data);
+			swpacket->Debug();
+			break;
+		
 
 		default:
-/*#if DEBUG_RECV_DISPLAYPKT == 1
-			printf("Found opcode %s\n", opcode);
-			Log::WriteLogA("OP : %04x\tsize : %04x", swheader->_op, swheader->_size);
-			for (int i = 0; i < swheader->_size; i++)
-				Log::WriteLogNoDate(L"%02x ", data[i]);
-			Log::WriteLogNoDate(L"\n\n");
-#endif*/
 			break;
 		}
+
+		
+
+
+
+#if DEBUG_RECV_DISPLAYPKT == 1
+		Log::WriteLogA("Found opcode %s\n", opcode);
+		Log::WriteLogA("OP : %04x\tsize : %04x", swheader->_op, swheader->_size);
+		for (int i = 0; i < swheader->_size; i++)
+			Log::WriteLogNoDate(L"%02x ", data[i]);
+		Log::WriteLogNoDate(L"\n\n");
+#endif
 
 		if (swpacket != nullptr) {
 #if DEBUG_RECV_CREATEPACKET == 1
 			swpacket->Debug();
 #endif
+
 			// Todo
 			swpacket->Do();
 

@@ -393,6 +393,9 @@
     <ClInclude Include="SWConfig.h">
       <Filter>PCH</Filter>
     </ClInclude>
+    <ClInclude Include="Soulworker Packet\SWPacketSquad.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -634,6 +637,9 @@
     </ClCompile>
     <ClCompile Include="Soulworker Packet\SWPacketEnterAnimation.cpp">
       <Filter>SWPacket\Packet\0x05</Filter>
+    </ClCompile>
+    <ClCompile Include="Soulworker Packet\SWPacketSquad.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
