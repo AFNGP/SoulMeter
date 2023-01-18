@@ -9,7 +9,9 @@ SWPacketSquad::SWPacketSquad(SWHEADER* swheader, BYTE* data) : SWPacket(swheader
 
 VOID SWPacketSquad::Do() {
 
-	size_t offset = 32; //unk01
+	size_t offset = sizeof(SWHEADER); //SWHEADER
+
+	offset += 32; //unk01
 
 	UINT16 squadLeaderNickSize = 0;
 	memcpy(&squadLeaderNickSize, _data + offset, 2);
@@ -67,9 +69,12 @@ VOID SWPacketSquad::Log() {
 
 VOID SWPacketSquad::Debug() {
 	
+	size_t offset = sizeof(SWHEADER); //SWHEADER
+
+	offset += 32; //unk01
+
 	Log::WriteLogA("Skipping past unk01 (32 bytes)");
 
-	size_t offset = 32; //unk01
 	Log::WriteLogA("At offset %zu", offset);
 
 	UINT16 squadLeaderNickSize = 0;
