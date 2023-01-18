@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include ".\Soulworker Packet\SWPacket.h"
 #include ".\Damage Meter\Damage Meter.h"
 #include ".\Soulworker Packet\SWPacketSquad.h"
@@ -11,7 +11,14 @@ VOID SWPacketSquad::Do() {
 
 	size_t offset = sizeof(SWHEADER); //SWHEADER
 
-	offset += 32; //unk01
+	offset += 12; //unk01
+
+	UINT16 msgLen = 0; //RECRUITMSG
+	memcpy(&msgLen, _data + offset, 2);
+
+	offset += 2; //msgLen
+
+	offset += msgLen; //Recruitment message
 
 	UINT16 squadLeaderNickSize = 0;
 	memcpy(&squadLeaderNickSize, _data + offset, 2);
@@ -65,15 +72,29 @@ VOID SWPacketSquad::Do() {
 
 VOID SWPacketSquad::Log() {
 
-}
-
-VOID SWPacketSquad::Debug() {
-	
 	size_t offset = sizeof(SWHEADER); //SWHEADER
 
-	offset += 32; //unk01
+	Log::WriteLogA("Skipping past unk01 (12 bytes)");
+	offset += 12; //unk01
 
-	Log::WriteLogA("Skipping past unk01 (32 bytes)");
+	Log::WriteLogA("At offset %zu", offset);
+	UINT16 msgLen = 0; //RECRUITMSG
+	memcpy(&msgLen, _data + offset, 2);
+
+	offset += 2; //msgLen
+
+	Log::WriteLogA("At offset %zu", offset);
+	WCHAR utf16[MAX_NAME_LEN] = { 0 };
+	memcpy_s(utf16, MAX_NAME_LEN * sizeof(WCHAR), _data + offset, msgLen);
+	CHAR utf8[MAX_NAME_LEN] = { 0 };
+	if (!UTF16toUTF8(utf16, utf8, MAX_NAME_LEN)) {
+		Log::WriteLogA("Failed to convert recruitment message");
+	}
+	else {
+		Log::WriteLogA("Recruitment message is %s (%04x bytes)", utf8, msgLen);
+	}
+
+	offset += msgLen; //Recruitment message
 
 	Log::WriteLogA("At offset %zu", offset);
 
@@ -84,15 +105,14 @@ VOID SWPacketSquad::Debug() {
 	offset += 2; //SQUADLEADERNICKSIZE
 
 	Log::WriteLogA("At offset %zu skip leader name for now", offset);
-	/*WCHAR utf16[MAX_NAME_LEN] = {0};
 	memcpy_s(utf16, MAX_NAME_LEN * sizeof(WCHAR), _data + offset, squadLeaderNickSize);
-	CHAR utf8[MAX_NAME_LEN] = {0};
+	utf16[squadLeaderNickSize] = 0;
 	if (!UTF16toUTF8(utf16, utf8, MAX_NAME_LEN)) {
 		Log::WriteLogA("Failed to convert squad leader name");
 	}
 	else {
 		Log::WriteLogA("Squad leader name is %s (%04x bytes)", utf8, squadLeaderNickSize);
-	}*/
+	}
 
 	offset += squadLeaderNickSize; //SQUADLEADERNICK
 
@@ -126,10 +146,8 @@ VOID SWPacketSquad::Debug() {
 		offset += 2; //PLAYERNICKSIZE
 		Log::WriteLogA("At offset %zu", offset);
 
-		WCHAR utf16[MAX_NAME_LEN] = { 0 };
 		memcpy_s(utf16, MAX_NAME_LEN * sizeof(WCHAR), _data + offset, playerNickSize);
-
-		CHAR utf8[MAX_NAME_LEN] = { 0 };
+		utf16[playerNickSize] = 0;
 		if (!UTF16toUTF8(utf16, utf8, MAX_NAME_LEN)) {
 			Log::WriteLogA("Failed to convert player name");
 		}
@@ -151,8 +169,12 @@ VOID SWPacketSquad::Debug() {
 		offset += 1; //PLAYERJOB
 
 		Log::WriteLogA("Skipping past D_unk02 (50 bytes)");
-		
+
 		offset += 50; //D_unk02
 	}
+
+}
+
+VOID SWPacketSquad::Debug() {
 
 }

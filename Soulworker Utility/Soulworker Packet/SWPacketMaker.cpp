@@ -234,7 +234,7 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 
 #if DEBUG_RECV_DISPLAYPKT == 1
 		Log::WriteLogA("Found opcode %s\n", opcode);
-		Log::WriteLogA("OP : %04x\tsize : %04x", swheader->_op, swheader->_size);
+		Log::WriteLogA("OP : %04x\tsize : %04x", _byteswap_ushort(swheader->_op), swheader->_size);
 		for (int i = 0; i < swheader->_size; i++)
 			Log::WriteLogNoDate(L"%02x ", data[i]);
 		Log::WriteLogNoDate(L"\n\n");
@@ -245,7 +245,7 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 			swpacket->Debug();
 #endif
 			if (opcode == "SQUAD") {
-				swpacket->Debug();
+				swpacket->Log();
 			}
 			// Todo
 			swpacket->Do();
