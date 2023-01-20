@@ -244,9 +244,6 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 #if DEBUG_RECV_CREATEPACKET == 1
 			swpacket->Debug();
 #endif
-			if (opcode == "SQUAD") {
-				swpacket->Log();
-			}
 			// Todo
 			swpacket->Do();
 

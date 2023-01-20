@@ -160,7 +160,6 @@ VOID SWDamageMeter::AddPlayerGetDamage(UINT32 playerId, UINT64 totalDMG, SWPACKE
 
 	if (CheckPlayer(playerId)) {
 		SWDamagePlayer* newPlayer = new SWDamagePlayer(playerId);
-		Log::WriteLogA("Adding new player ID %32x to meter", playerId);
 		newPlayer->AddGetDamage(totalDMG, damageType, monsterID, skillID);
 		_playerInfo.push_back(newPlayer);
 	}

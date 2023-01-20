@@ -1,5 +1,11 @@
 # Current Repo
 
+## 1.4.1.0
+Added support for Vile Predator
+
+## 1.4.0.1
+Fixed font issues for KR/GLB/JP
+
 ## 1.4.0.0
 
 - Removed npcap support

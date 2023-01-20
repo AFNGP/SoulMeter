@@ -106,7 +106,8 @@ VOID SWPacketSquad::Log() {
 
 	Log::WriteLogA("At offset %zu skip leader name for now", offset);
 	memcpy_s(utf16, MAX_NAME_LEN * sizeof(WCHAR), _data + offset, squadLeaderNickSize);
-	utf16[squadLeaderNickSize] = 0;
+	memset(utf16, 0, sizeof(utf16));
+	memset(utf8, 0, sizeof(utf8));
 	if (!UTF16toUTF8(utf16, utf8, MAX_NAME_LEN)) {
 		Log::WriteLogA("Failed to convert squad leader name");
 	}
@@ -146,6 +147,8 @@ VOID SWPacketSquad::Log() {
 		offset += 2; //PLAYERNICKSIZE
 		Log::WriteLogA("At offset %zu", offset);
 
+		memset(utf16, 0, sizeof(utf16));
+		memset(utf8, 0, sizeof(utf8));
 		memcpy_s(utf16, MAX_NAME_LEN * sizeof(WCHAR), _data + offset, playerNickSize);
 		utf16[playerNickSize] = 0;
 		if (!UTF16toUTF8(utf16, utf8, MAX_NAME_LEN)) {
