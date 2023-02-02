@@ -1,5 +1,8 @@
 # Current Repo
 
+## 1.4.1.1
+Few string fixes and updated for new Global update
+
 ## 1.4.1.0
 Added support for Vile Predator
 
