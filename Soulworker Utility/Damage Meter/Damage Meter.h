@@ -134,6 +134,9 @@ public:
 	UINT64 _avgABSum = 0;
 	UINT64 _avgABPreviousTime = 0;
 
+	UINT64 _avgABSumU = 0;
+	UINT64 _avgABPreviousTimeU = 0;
+
 	UINT64 _avgBDSum = 0;
 	UINT64 _avgBDPreviousTime = 0;
 
@@ -182,6 +185,7 @@ public:
 		_job = 0;
 		_avgABSum = 0;
 		_avgABPreviousTime = 0;
+		_avgABPreviousTimeU = 0;
 		_avgBDSum = 0;
 		_avgBDPreviousTime = 0;
 	}
@@ -229,7 +233,9 @@ public:
 				UINT64 time = (UINT64)((DOUBLE)DAMAGEMETER.GetTime()); // timer time
 				FLOAT correctedAB = (_armorBreak > 100) ? 100 : _armorBreak;
 				_avgABSum += static_cast<UINT64>((time - _avgABPreviousTime) * correctedAB);
+				_avgABSumU += static_cast<UINT64>((time - _avgABPreviousTime) * _armorBreak);
 				_avgABPreviousTime = time;
+				_avgABPreviousTimeU = time;
 
 				if (_armorBreak >= 100) {
 					if (!_fullABStarted) {
@@ -311,7 +317,9 @@ public:
 
 		FLOAT correctedAB = (_armorBreak > 100) ? 100 : _armorBreak;
 		_avgABSum += static_cast<UINT64>((currentTime - _avgABPreviousTime) * correctedAB);
+		_avgABSumU += static_cast<UINT64>((currentTime - _avgABPreviousTimeU) * _armorBreak);
 		_avgABPreviousTime = currentTime;
+		_avgABPreviousTimeU = currentTime;
 
 		_avgBDSum += static_cast<UINT64>((currentTime - _avgBDPreviousTime) * _bossDamage);
 		_avgBDPreviousTime = currentTime;
@@ -360,6 +368,11 @@ public:
 				currentAB = currentAB > 100.0 ? 100.0 : currentAB; // 
 				UINT64 calculatedAvgAB = static_cast<UINT64>((_avgABSum + avgTimeDifference * currentAB));
 				(*player)->SetHistoryAvgAB((DOUBLE)calculatedAvgAB / currentTime);
+
+				UINT64 avgTimeDifferenceU = currentTime - _avgABPreviousTimeU;
+				DOUBLE currentABU = GetStat(StatType::ArmorBreak);
+				UINT64 calculatedAvgABU = static_cast<UINT64>((_avgABSumU + avgTimeDifferenceU * currentABU));
+				(*player)->SetHistoryAvgAB((DOUBLE)calculatedAvgABU / currentTime);
 
 				avgTimeDifference = currentTime - _avgBDPreviousTime;
 				UINT64 calculatedAvgBD = static_cast<UINT64>((_avgBDSum + avgTimeDifference * _bossDamage));
@@ -430,6 +443,9 @@ public:
 
 		_avgABSum = 0;
 		_avgABPreviousTime = 0;
+
+		_avgABSumU = 0;
+		_avgABPreviousTimeU = 0;
 
 		_avgBDSum = 0;
 		_avgBDPreviousTime = 0;

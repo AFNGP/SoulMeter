@@ -50,8 +50,9 @@ private:
 	USHORT _deathCounts = 0;
 
 	DOUBLE _historyAvgAB = 0.0;
+	DOUBLE _historyAvgABU = 0.0;
 	DOUBLE _historyAvgBD = 0.0;
-
+	
 	DOUBLE _historygear90 = 0.0;
 	DOUBLE _historygear50 = 0.0;
 	DOUBLE _historyacc01 = 0.0;
@@ -61,6 +62,7 @@ private:
 	BYTE _JqStack = 0;
 
 	DOUBLE _historyABTime = 0;
+	DOUBLE _historyABTimeU = 0;
 
 	DOUBLE _historyAggroTime = 0;
 
@@ -113,10 +115,14 @@ public:
 	USHORT GetDeathCount();
 
 	DOUBLE GetHistoryABTime();
+	DOUBLE GetHistoryABTimeU();
 	VOID SetHistoryABTime(DOUBLE historyABTime);
+	VOID SetHistoryABTimeU(DOUBLE historyABTime);
 
 	VOID SetHistoryAvgAB(DOUBLE historyAvgAB);
+	VOID SetHistoryAvgABU(DOUBLE historyAvgAB);
 	DOUBLE GetHistoryAvgAB();
+	DOUBLE GetHistoryAvgABU();
 
 	VOID SetHistoryAvgBD(DOUBLE historyAvgBD);
 	DOUBLE GetHistoryAvgBD();
@@ -216,6 +222,7 @@ public:
 		tdpb.add__deathcounts(_deathCounts);
 
 		tdpb.add__historyavgab(_historyAvgAB);
+		tdpb.add__historyavgabu(_historyAvgABU);
 		tdpb.add__historyavgbd(_historyAvgBD);
 		tdpb.add__historygear90(_historygear90);
 		tdpb.add__historygear50(_historygear50);
@@ -225,6 +232,7 @@ public:
 		tdpb.add__historylosedhp(_historyLosedHP);
 		tdpb.add__jqstack(_JqStack);
 		tdpb.add__historyabtime(_historyABTime);
+		tdpb.add__historyabtimeu(_historyABTimeU);
 
 		tdpb.add__monsterinfo(fcvDamageMonster);
 		tdpb.add__skillcount(fcvSkillCount);
@@ -295,6 +303,7 @@ public:
 		_deathCounts = tDamagePlayer->_deathcounts();
 
 		_historyAvgAB = tDamagePlayer->_historyavgab();
+		_historyAvgABU = tDamagePlayer->_historyavgabu();
 		_historyAvgBD = tDamagePlayer->_historyavgbd();
 		_historygear90 = tDamagePlayer->_historygear90();
 		_historygear50 = tDamagePlayer->_historygear50();
@@ -304,6 +313,7 @@ public:
 		_historyLosedHP = tDamagePlayer->_historylosedhp();
 		_JqStack = tDamagePlayer->_jqstack();
 		_historyABTime = tDamagePlayer->_historyabtime();
+		_historyABTimeU = tDamagePlayer->_historyabtimeu();
 
 		_historyAggroTime = tDamagePlayer->_historyaggrotime();
 
