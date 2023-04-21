@@ -206,6 +206,7 @@
     <ClInclude Include="Soulworker Packet\SWPacketAggroChanged.h" />
     <ClInclude Include="Soulworker Packet\SWPacketAkasic.h" />
     <ClInclude Include="Soulworker Packet\SWPacketBigParty.h" />
+    <ClInclude Include="Soulworker Packet\SWPacketBrooch.h" />
     <ClInclude Include="Soulworker Packet\SWPacketBuffIn.h" />
     <ClInclude Include="Soulworker Packet\SWPacketBuffOut.h" />
     <ClInclude Include="Soulworker Packet\SWPacketCharacterUpdateSpecialOptionList.h" />
@@ -293,6 +294,7 @@
     <ClCompile Include="Soulworker Packet\SWPacketAggroChanged.cpp" />
     <ClCompile Include="Soulworker Packet\SWPacketAkasic.cpp" />
     <ClCompile Include="Soulworker Packet\SWPacketBigParty.cpp" />
+    <ClCompile Include="Soulworker Packet\SWPacketBrooch.cpp" />
     <ClCompile Include="Soulworker Packet\SWPacketBuffIn.cpp" />
     <ClCompile Include="Soulworker Packet\SWPacketBuffOut.cpp" />
     <ClCompile Include="Soulworker Packet\SWPacketCharacterUpdateSpecialOptionList.cpp" />
