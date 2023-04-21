@@ -5,6 +5,12 @@ This program allows to capture damage information in SW using network packets (W
 
 Currently supports JP, GLB, KR versions. Meter does work for TC and KR but the language is English. Might look into making them work for KR/TC languages. 
 
+Currently managed branches:
+- JP (Main):  [https://github.com/AFNGP/SoulMeter](https://github.com/AFNGP/SoulMeter)
+- KR (KRSW): [https://github.com/AFNGP/SoulMeter/tree/KRSW](https://github.com/AFNGP/SoulMeter/tree/KRSW)
+- GLB (GLBSW): [https://github.com/AFNGP/SoulMeter/tree/GLBSW](https://github.com/AFNGP/SoulMeter/tree/GLBSW)
+- Boiling (BoilingSW): [https://github.com/AFNGP/SoulMeter/tree/BoilingSW](https://github.com/AFNGP/SoulMeter/tree/BoilingSW)
+
 Info from previous repos
 ---
 
