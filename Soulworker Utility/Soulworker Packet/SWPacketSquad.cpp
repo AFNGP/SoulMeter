@@ -66,7 +66,7 @@ VOID SWPacketSquad::Do() {
 
 		offset += 1; //PLAYERJOB
 
-		offset += 50; //D_unk02
+		offset += 58; //D_unk02
 	}
 }
 
