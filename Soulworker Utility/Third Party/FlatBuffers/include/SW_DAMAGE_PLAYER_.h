@@ -68,7 +68,9 @@ struct _tDamagePlayer FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT__HISTORYAGGROTIME = 86,
     VT__HISTORYAVGAS = 88,
     VT__HISTORYASTIME = 90,
-    VT__TERAFEVERNPROC = 92
+    VT__TERAFEVERNPROC = 92,
+    VT__HISTORYAVGABU = 94,
+    VT__HISTORYABTIMEU = 96,
   };
   uint32_t _id() const {
     return GetField<uint32_t>(VT__ID, 0);
@@ -204,6 +206,12 @@ struct _tDamagePlayer FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   }
   double _historyastime() const {
     return GetField<double>(VT__HISTORYASTIME, 0.0);
+  }
+  double _historyavgabu() const {
+      return GetField<double>(VT__HISTORYAVGABU, 0.0);
+  }
+  double _historyabtimeu() const {
+      return GetField<double>(VT__HISTORYABTIMEU, 0.0);
   }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -359,6 +367,9 @@ struct _tDamagePlayerBuilder {
   void add__historyavgab(double _historyavgab) {
     fbb_.AddElement<double>(_tDamagePlayer::VT__HISTORYAVGAB, _historyavgab, 0.0);
   }
+  void add__historyavgabu(double _historyavgab) {
+      fbb_.AddElement<double>(_tDamagePlayer::VT__HISTORYAVGABU, _historyavgab, 0.0);
+  }
   void add__historyavgbd(double _historyavgbd) {
     fbb_.AddElement<double>(_tDamagePlayer::VT__HISTORYAVGBD, _historyavgbd, 0.0);
   }
@@ -382,6 +393,9 @@ struct _tDamagePlayerBuilder {
   }
   void add__historyabtime(double _historyabtime) {
     fbb_.AddElement<double>(_tDamagePlayer::VT__HISTORYABTIME, _historyabtime, 0.0);
+  }
+  void add__historyabtimeu(double _historyabtime) {
+      fbb_.AddElement<double>(_tDamagePlayer::VT__HISTORYABTIMEU, _historyabtime, 0.0);
   }
   void add__monsterinfo(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<SoulMeterFBS::History::_tDamageMonster>>> _monsterinfo) {
     fbb_.AddOffset(_tDamagePlayer::VT__MONSTERINFO, _monsterinfo);
@@ -442,6 +456,7 @@ inline flatbuffers::Offset<_tDamagePlayer> Create_tDamagePlayer(
     uint16_t _dodgecounts = 0,
     uint16_t _deathcounts = 0,
     double _historyavgab = 0.0,
+    double _historyavgabu = 0.0,
     double _historyavgbd = 0.0,
     double _historygear90 = 0.0,
     double _historygear50 = 0.0,
@@ -467,6 +482,7 @@ inline flatbuffers::Offset<_tDamagePlayer> Create_tDamagePlayer(
   builder_.add__historygear90(_historygear90);
   builder_.add__historyavgbd(_historyavgbd);
   builder_.add__historyavgab(_historyavgab);
+  builder_.add__historyavgabu(_historyavgab);
   builder_.add__soulstonedamageforsoulstone(_soulstonedamageforsoulstone);
   builder_.add__damageforsoulstone(_damageforsoulstone);
   builder_.add__soulstonedamage(_soulstonedamage);
@@ -536,6 +552,7 @@ inline flatbuffers::Offset<_tDamagePlayer> Create_tDamagePlayerDirect(
     uint16_t _dodgecounts = 0,
     uint16_t _deathcounts = 0,
     double _historyavgab = 0.0,
+    double _historyavgabu = 0.0,
     double _historyavgbd = 0.0,
     double _historygear90 = 0.0,
     double _historygear50 = 0.0,
@@ -584,6 +601,7 @@ inline flatbuffers::Offset<_tDamagePlayer> Create_tDamagePlayerDirect(
       _dodgecounts,
       _deathcounts,
       _historyavgab,
+      _historyavgabu,
       _historyavgbd,
       _historygear90,
       _historygear50,
