@@ -259,7 +259,7 @@ VOID PlayerTable::SetupTable() {
 	ImGuiTableFlags tableFlags = ImGuiTableFlags_None;
 	tableFlags |= (ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable | ImGuiTableFlags_Resizable);
 
-	const int columnSize = 47;
+	const int columnSize = 48;
 	if (ImGui::BeginTable("###Player Table", columnSize, tableFlags)) {
 
 		ImGuiTableColumnFlags columnFlags = ImGuiTableColumnFlags_None;
@@ -288,7 +288,7 @@ VOID PlayerTable::SetupTable() {
 		ImGui::TableSetupColumn(LANGMANAGER.GetText("STR_TABLE_SOULSTONE_PROC"), columnFlags | ImGuiTableColumnFlags_WidthFixed, -1);
 		ImGui::TableSetupColumn(LANGMANAGER.GetText("STR_TABLE_SOULSTONE_DAMAGE"), columnFlags | ImGuiTableColumnFlags_WidthFixed, -1);
 		ImGui::TableSetupColumn(LANGMANAGER.GetText("STR_TABLE_AVERAGE_AB"), columnFlags | ImGuiTableColumnFlags_WidthFixed, -1);
-		//ImGui::TableSetupColumn(LANGMANAGER.GetText("STR_TABLE_AVERAGE_AB_U"), columnFlags | ImGuiTableColumnFlags_WidthFixed, -1);
+		ImGui::TableSetupColumn(LANGMANAGER.GetText("STR_TABLE_AVERAGE_AB_U"), columnFlags | ImGuiTableColumnFlags_WidthFixed, -1);
 		ImGui::TableSetupColumn(LANGMANAGER.GetText("STR_TABLE_AVERAGE_BD"), columnFlags | ImGuiTableColumnFlags_WidthFixed, -1);
 		ImGui::TableSetupColumn(LANGMANAGER.GetText("STR_TABLE_MISS"), columnFlags | ImGuiTableColumnFlags_WidthFixed, -1);
 		ImGui::TableSetupColumn(LANGMANAGER.GetText("STR_TABLE_MISS_RATE"), columnFlags | ImGuiTableColumnFlags_WidthFixed, -1);
@@ -665,6 +665,34 @@ VOID PlayerTable::UpdateTable(FLOAT windowWidth) {
 
 				savedResultAB = (DOUBLE)calculatedAvgAB / milliTableTime;
 				sprintf_s(label, 128, "%.1f", savedResultAB);
+			}
+		}
+
+		ImGui::Text(label);
+		ImGui::TableNextColumn();
+
+		// history data tmp
+		static DOUBLE savedResultABU = 0;
+
+		if (DAMAGEMETER.GetPlayerName((*itr)->GetID()) != LANGMANAGER.GetText("STR_TABLE_YOU") || _tableTime == 0) {
+			sprintf_s(label, 128, "-");
+		}
+		else if (DAMAGEMETER.isHistoryMode()) {
+			savedResultABU = (*itr)->GetHistoryAvgABU();
+			sprintf_s(label, 128, "%.1f", savedResultABU);
+		}
+		else {
+
+			if ((INT64)(milliTableTime - playerMetaData->_avgABPreviousTimeU) < 0) {
+				sprintf_s(label, 128, "%.1f", savedResultABU);
+			}
+			else {
+				UINT64 timeDifference = (milliTableTime - playerMetaData->_avgABPreviousTimeU);
+				DOUBLE currentABU = playerMetaData->GetStat(StatType::ArmorBreak);
+				UINT64 calculatedAvgABU = static_cast<UINT64>((playerMetaData->_avgABSumU + timeDifference * currentABU));
+
+				savedResultABU = (DOUBLE)calculatedAvgABU / milliTableTime;
+				sprintf_s(label, 128, "%.1f", savedResultABU);
 			}
 		}
 

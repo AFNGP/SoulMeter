@@ -241,9 +241,19 @@ DOUBLE SWDamagePlayer::GetHistoryABTime()
 	return _historyABTime;
 }
 
+DOUBLE SWDamagePlayer::GetHistoryABTimeU()
+{
+	return _historyABTimeU;
+}
+
 VOID SWDamagePlayer::SetHistoryABTime(DOUBLE historyABTime)
 {
 	_historyABTime = historyABTime;
+}
+
+VOID SWDamagePlayer::SetHistoryABTimeU(DOUBLE historyABTime)
+{
+	_historyABTimeU = historyABTime;
 }
 
 VOID SWDamagePlayer::SetHistoryAvgAB(DOUBLE historyAvgAB)
@@ -251,9 +261,19 @@ VOID SWDamagePlayer::SetHistoryAvgAB(DOUBLE historyAvgAB)
 	_historyAvgAB = historyAvgAB;
 }
 
+VOID SWDamagePlayer::SetHistoryAvgABU(DOUBLE historyAvgAB)
+{
+	_historyAvgABU = historyAvgAB;
+}
+
 DOUBLE SWDamagePlayer::GetHistoryAvgAB()
 {
 	return _historyAvgAB;
+}
+
+DOUBLE SWDamagePlayer::GetHistoryAvgABU()
+{
+	return _historyAvgABU;
 }
 
 VOID SWDamagePlayer::SetHistoryAvgBD(DOUBLE historyAvgBD)

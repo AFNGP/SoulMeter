@@ -43,6 +43,7 @@
     "STR_TABLE_SOULSTONE_PROC": "Stone Proc",
     "STR_TABLE_SOULSTONE_DAMAGE": "Stone DMG",
     "STR_TABLE_AVERAGE_AB": "Avg.AB",
+	"STR_TABLE_AVERAGE_AB_U": "Avg.AB(U)",
     "STR_TABLE_AVERAGE_BD": "Avg.BD",
     "STR_TABLE_MISS": "Miss",
     "STR_TABLE_MISS_RATE": "Miss%",
