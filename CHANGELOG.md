@@ -1,5 +1,18 @@
 # Current Repo
 
+## 1.5.0.1
+Fixed Avg ABU not saving correctly after run
+
+## 1.5.0.0
+Fixed party, force, and squad crashes in GLB/TC and KR
+Added Tera Fever proc count
+Added uncapped average AB (considers AB values above 100% when calculating the average, useful for Erwin players)
+Each server is managed on its own branch now:
+• JP (Main): https://github.com/AFNGP/SoulMeter
+• KR (KRSW): https://github.com/AFNGP/SoulMeter/tree/KRSW
+• GLB (GLBSW): https://github.com/AFNGP/SoulMeter/tree/GLBSW
+• Boiling (BoilingSW): https://github.com/AFNGP/SoulMeter/tree/BoilingSW
+
 ## 1.4.1.1
 Few string fixes and updated for new Global update
 
