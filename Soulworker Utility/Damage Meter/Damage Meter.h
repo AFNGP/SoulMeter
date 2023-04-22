@@ -372,7 +372,7 @@ public:
 				UINT64 avgTimeDifferenceU = currentTime - _avgABPreviousTimeU;
 				DOUBLE currentABU = GetStat(StatType::ArmorBreak);
 				UINT64 calculatedAvgABU = static_cast<UINT64>((_avgABSumU + avgTimeDifferenceU * currentABU));
-				(*player)->SetHistoryAvgAB((DOUBLE)calculatedAvgABU / currentTime);
+				(*player)->SetHistoryAvgABU((DOUBLE)calculatedAvgABU / currentTime);
 
 				avgTimeDifference = currentTime - _avgBDPreviousTime;
 				UINT64 calculatedAvgBD = static_cast<UINT64>((_avgBDSum + avgTimeDifference * _bossDamage));
