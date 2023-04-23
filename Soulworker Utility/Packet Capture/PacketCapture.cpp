@@ -9,9 +9,15 @@ BOOL PacketCapture::Init() {
 	DWORD errorCode = 0;
 
 	_useMode = UIOPTION.GetCaptureMode();
+	BOOL isMudfish = UIOPTION.isMudfish();
+	
 
 	if (error || _useMode == (INT32)CaptureType::_WINDIVERT)
-		error = WINDIVERT.Init(_handle) > 0;
+	{
+		error = WINDIVERT.Init(_handle, isMudfish, isMudfish != _isMudfish) > 0;
+		_isMudfish = isMudfish;
+		_srcPort = _isMudfish ? 36650 : 10200;
+	}
 
 	return error;
 }
@@ -70,7 +76,7 @@ VOID PacketCapture::ParseWinDivertStruct(IPv4Packet* packet, uint8_t* pkt)
 	packet->_datalength = packet->_ipHeader->length - (packet->_ipHeader->len * 4 + packet->_tcpHeader->length * 4);
 	packet->_data = (pkt + packet->_ipHeader->len * 4 + packet->_tcpHeader->length * 4);
 
-	packet->_isRecv = (packet->_tcpHeader->src_port == 10200);
+	packet->_isRecv = (packet->_tcpHeader->src_port == PACKETCAPTURE.GetPort());
 
 	packet->_ts = GetCurrentTimeStamp();
 
@@ -102,7 +108,7 @@ VOID PacketCapture::PrintTCPHeader(IPv4Packet* p_packet) {
 
 	TCPHEADER* th = p_packet->_tcpHeader;
 
-	if (th->src_port != 10200)
+	if (th->src_port != PACKETCAPTURE.GetPort() || th->dest_port != PACKETCAPTURE.GetPort())
 		return;
 
 	Log::WriteLogA("======== TCP Header ========");

@@ -46,6 +46,8 @@ private:
 	static VOID PrintTCPHeader(IPv4Packet* p_packet);
 	
 	INT32 _useMode;
+	USHORT _srcPort;
+	BOOL _isMudfish;
 
 	UINT64 _allLoss = 0;
 	UINT64 _loss = 0;
@@ -76,7 +78,10 @@ public:
 
 		return "Windivert";
 	}
-
+	const USHORT& GetPort()
+	{
+		return _srcPort;
+	}
 	const INT32& GetMode()
 	{
 		return _useMode;
