@@ -19,10 +19,11 @@ private:
 
 	BOOL _stop = FALSE;
 	BOOL _inited = FALSE;
+	BOOL _wasMudfish = FALSE;
 
 public:
 	MyWinDivert() { }
 	~MyWinDivert() {}
 
-	DWORD Init(HANDLE handle);
+	DWORD Init(HANDLE handle, BOOL& isMudfish, BOOL reInit);
 };

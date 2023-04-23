@@ -27,6 +27,7 @@ private:
 
 	FLOAT _columnFontScale;
 	FLOAT _tableFontScale;
+	BOOL _isMudfish;
 	BOOL _is1K;
 	BOOL _is1M;
 	BOOL _isSoloMode;
@@ -87,6 +88,7 @@ public:
 	const ImVec4& GetActiveColor();
 	const ImVec4& GetInActiveColor();
 	const ImVec4& GetWindowBGColor();
+	const BOOL& isMudfish();
 	const BOOL& is1K();
 	const BOOL& is1M();
 	const BOOL& isSoloMode();

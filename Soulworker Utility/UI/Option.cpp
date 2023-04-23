@@ -14,7 +14,7 @@
 
 UiOption::UiOption()  : 
 	_open(0), _framerate(1), _windowBorderSize(1), _fontScale(1), _columnFontScale(1), _tableFontScale(1), 
-	_is1K(0), _is1M(0), _isSoloMode(0), _hideName(0), _isTopMost(true), _teamTA_LF(false), _isSoloRankMode(FALSE), _isUseSaveData(FALSE),
+	_isMudfish(0), _is1K(0), _is1M(0), _isSoloMode(0), _hideName(0), _isTopMost(true), _teamTA_LF(false), _isSoloRankMode(FALSE), _isUseSaveData(FALSE),
 	_isDontSaveUnfinishedMaze(false), _isUpdateCheck(true),
 	_cellPadding(0, 0), _windowWidth(800), _refreshTime((FLOAT)0.3), _captureMode((INT32)CaptureType::_WINDIVERT), _oriIsUseSaveData(FALSE),
 	_selectedInterface("ALL")
@@ -295,10 +295,14 @@ VOID UiOption::ShowInterfaceSelector() {
 
 VOID UiOption::ShowFeatures()
 {
+	if (ImGui::Checkbox(LANGMANAGER.GetText("STR_OPTION_MUDFISH"), (bool*)&_isMudfish)) {
+		PACKETCAPTURE.getInstance().Init();
+	}
 	if (ImGui::Checkbox(LANGMANAGER.GetText("STR_OPTION_UNIT_1K"), (bool*)&_is1K)) {
 		if (_is1M)
 			_is1M = FALSE;
 	}
+
 
 	if (ImGui::Checkbox(LANGMANAGER.GetText("STR_OPTION_UNIT_1M"), (bool*)&_is1M)) {
 		if (_is1K)
@@ -466,6 +470,12 @@ BOOL UiOption::GetOption() {
 #if DEBUG_READ_XML == 1
 	Log::WriteLog(const_cast<LPTSTR>(_T("Read ColumnFontScale = %.1f")), _columnFontScale);
 #endif
+
+	attr = ele->FindAttribute("MUDFISH");
+	if (attr == nullptr)
+		_isMudfish = FALSE;
+	else
+		attr->QueryIntValue(&_isMudfish);
 
 	attr = ele->FindAttribute("K");
 
@@ -893,6 +903,7 @@ BOOL UiOption::SaveOption(BOOL skipWarning) {
 	option->SetAttribute("GlobalScale", _fontScale);
 	option->SetAttribute("TableScale", _tableFontScale);
 	option->SetAttribute("ColumnScale", _columnFontScale);
+	option->SetAttribute("MUDFISH", _isMudfish);
 	option->SetAttribute("K", _is1K);
 	option->SetAttribute("M", _is1M);
 	option->SetAttribute("IsSoloMode", _isSoloMode);
@@ -1063,6 +1074,10 @@ const ImVec4& UiOption::GetActiveColor() {
 
 const ImVec4& UiOption::GetInActiveColor() {
 	return _activeColor[0];
+}
+
+const BOOL& UiOption::isMudfish() {
+	return _isMudfish;
 }
 
 const BOOL& UiOption::is1K() {

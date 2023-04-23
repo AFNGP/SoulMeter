@@ -7,8 +7,9 @@
 #include <ws2ipdef.h>
 #include <iphlpapi.h>
 #include <stdio.h>
+#include <iphlpapi.h>
 
-DWORD MyWinDivert::Init(HANDLE handle) {
+DWORD MyWinDivert::Init(HANDLE handle, BOOL& isMudfish, BOOL reInit) {
 
 	DWORD error = ERROR_SUCCESS;
 
@@ -16,7 +17,44 @@ DWORD MyWinDivert::Init(HANDLE handle) {
 
 		if (!_inited)
 		{
-			handle = WinDivertOpen(WINDIVERT_FILTER_RULE, WINDIVERT_LAYER_NETWORK, 0, WINDIVERT_FLAG_SNIFF);
+			char filterRule[512] = WINDIVERT_FILTER_RULE;
+			if (isMudfish)
+			{
+				do
+				{
+					ULONG remoteAddr;
+					inet_pton(AF_INET, "127.0.0.1", &remoteAddr);
+					USHORT remotePort = htons(36650);
+					USHORT localPort = 36650;
+					PMIB_TCPTABLE2 tcpTable = nullptr;
+					DWORD tcpTableSize = 0;
+					GetTcpTable2(tcpTable, &tcpTableSize, TRUE);
+					tcpTable = (PMIB_TCPTABLE2)malloc(tcpTableSize);
+					if (GetTcpTable2(tcpTable, &tcpTableSize, TRUE) != NO_ERROR) {
+						Log::WriteLogA("Could not get TCP TABLE\n");
+						isMudfish = FALSE;
+						break;
+					}
+					bool found = false;
+					for (DWORD i = 0; i < tcpTable->dwNumEntries; ++i) {
+						const MIB_TCPROW2& row = tcpTable->table[i];
+						if (row.dwRemoteAddr == remoteAddr && row.dwRemotePort == remotePort) {
+							localPort = ntohs(row.dwLocalPort);
+							found = true;
+							break;
+						}
+					}
+					if (found) {
+						sprintf_s(filterRule, "(tcp.DstPort == %d or tcp.DstPort == 36650) and tcp.PayloadLength > 0 and ip and loopback", localPort);
+					}
+					else {
+						Log::WriteLogA("Could find inbound port.\n");
+						isMudfish = FALSE;
+					}
+				} while (false);
+			}
+			
+			handle = WinDivertOpen(filterRule, WINDIVERT_LAYER_NETWORK, 0, WINDIVERT_FLAG_SNIFF);
 
 			if (handle == INVALID_HANDLE_VALUE) {
 				Log::WriteLog(const_cast<LPTSTR>(_T("Error in WinDivertOpen: %x")), GetLastError());
@@ -49,19 +87,29 @@ DWORD MyWinDivert::Init(HANDLE handle) {
 		}
 		else {
 			_stop = TRUE;
+			if (reInit)
+			{
+				WinDivertClose(_handle);
+			}
 			while (TRUE)
 			{
 				if (!_stop)
 					break;
 				Sleep(100);
 			}
+			if (reInit)
+			{
+				_inited = FALSE;
+				continue;
+			}
 		}
 		
 		HANDLE h = CreateThread(NULL, 0, ReceiveCallback, this, 0, NULL);
 		if (h != NULL)
 			CloseHandle(h);
+		break;
 
-	} while (false);
+	} while (true);
 
 	return error;
 }
@@ -121,13 +169,11 @@ DWORD MyWinDivert::ReceiveCallback(LPVOID prc) {
 			if (!WinDivertRecvEx(_this->_handle, pkt_data, WINDIVERT_MTU_MAX, 0, &addr, &recvlen, NULL)) {
 				// WinDivert 2.2
 				//if (!WinDivertRecvEx(_this->_handle, pkt_data, packetlen, &recvlen, 0, &addr, &addrlen, NULL)) {
-
-				Log::WriteLog(const_cast<LPTSTR>(_T("Error in WinDivertRecv : %x")), GetLastError());
+				if(!_this->_stop)
+					Log::WriteLog(const_cast<LPTSTR>(_T("Error in WinDivertRecv : %x")), GetLastError());
 				continue;
 			}
 
-			if (addr.Loopback)
-				continue;
 			if (IfIdx != 0 && IfIdx != addr.IfIdx)
 				continue;
 
