@@ -48,7 +48,7 @@ DWORD MyWinDivert::Init(HANDLE handle, BOOL& isMudfish, BOOL reInit) {
 						sprintf_s(filterRule, "(tcp.DstPort == %d or tcp.DstPort == 36650) and tcp.PayloadLength > 0 and ip and loopback", localPort);
 					}
 					else {
-						Log::WriteLogA("Could find inbound port.\n");
+						// Log::WriteLogA("Could find inbound port.\n");
 						isMudfish = FALSE;
 					}
 				} while (false);

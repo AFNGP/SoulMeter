@@ -74,6 +74,7 @@
     "STR_OPTION_WINDOWS_NAME": "設定",
     "STR_OPTION_FONTSCALE": "文字放大倍率",
     "STR_OPTION_FONTSCALE_DESC": "依據倍率調整文字大小",
+	"STR_OPTION_MUDFISH": "Enable Mudfish Mode",
     "STR_OPTION_UNIT_1K": "以千為單位顯示(K)",
     "STR_OPTION_UNIT_1M": "以百萬為單位顯示(M)",
     "STR_OPTION_SOLO_MODE": "單人模式 (只顯示自己的數據)",
