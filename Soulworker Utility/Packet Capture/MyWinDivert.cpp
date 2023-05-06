@@ -87,10 +87,7 @@ DWORD MyWinDivert::Init(HANDLE handle, BOOL& isMudfish, BOOL reInit) {
 		}
 		else {
 			_stop = TRUE;
-			if (reInit)
-			{
-				WinDivertClose(_handle);
-			}
+			WinDivertClose(_handle);
 			while (TRUE)
 			{
 				if (!_stop)
