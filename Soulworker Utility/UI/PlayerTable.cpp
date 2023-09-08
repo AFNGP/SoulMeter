@@ -1140,7 +1140,7 @@ VOID PlayerTable::CheckUpdate()
 {
 
 	DWORD error = ERROR_SUCCESS;
-
+	
 	do
 	{
 
