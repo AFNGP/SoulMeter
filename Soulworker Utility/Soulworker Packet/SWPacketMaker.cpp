@@ -224,7 +224,11 @@ VOID SWPacketMaker::CreateSWPacket(IPv4Packet* packet) {
 		
 		case RecvOPcode::SQUAD:
 			opcode = "SQUAD";
+			for (int i = 0; i < swheader->_size; i++)
+				Log::WriteLogNoDate(L"%02x ", data[i]);
+			Log::WriteLogNoDate(L"\n\n");
 			swpacket = new SWPacketSquad(swheader, data);
+			swpacket->Log();
 			break;
 		
 

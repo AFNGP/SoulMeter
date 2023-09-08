@@ -66,7 +66,7 @@ VOID SWPacketSquad::Do() {
 
 		offset += 1; //PLAYERJOB
 
-		offset += 58; //D_unk02
+		offset += 62; //D_unk02
 	}
 }
 
@@ -171,9 +171,9 @@ VOID SWPacketSquad::Log() {
 
 		offset += 1; //PLAYERJOB
 
-		Log::WriteLogA("Skipping past D_unk02 (50 bytes)");
+		Log::WriteLogA("Skipping past D_unk02 (62 bytes)");
 
-		offset += 58; //D_unk02
+		offset += 62; //D_unk02
 	}
 
 }
