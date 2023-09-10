@@ -27,14 +27,14 @@ VOID SWPacketSquad::Do() {
 
 	offset += squadLeaderNickSize; //SQUADLEADERNICK
 
-	offset += 4; //unk02
+	offset += 12; //unk02
 
 	UINT8 squadPlayerCount = 0;
 	memcpy(&squadPlayerCount, _data + offset, 1);
 
 	offset += 1; //SQUADPLAYERCOUNT
 
-	offset += 11; //unk03
+	offset += 3; //unk03
 
 	for (int i = 0; i < squadPlayerCount; i++) {
 		UINT32 playerId = 0;
@@ -119,7 +119,7 @@ VOID SWPacketSquad::Log() {
 
 	Log::WriteLogA("At offset %zu", offset);
 	Log::WriteLogA("Skipping past unk02 (4 bytes)");
-	offset += 4; //unk02
+	offset += 12; //unk02
 
 	Log::WriteLogA("At offset %zu", offset);
 	UINT8 squadPlayerCount = 0;
@@ -128,9 +128,9 @@ VOID SWPacketSquad::Log() {
 
 	offset += 1; //SQUADPLAYERCOUNT
 
-	Log::WriteLogA("At offset %zu skipping past unk03 (10 bytes)", offset);
+	Log::WriteLogA("At offset %zu skipping past unk03 (3 bytes)", offset);
 
-	offset += 11; //unk03
+	offset += 3; //unk03
 
 	for (int i = 0; i < squadPlayerCount; i++) {
 		UINT32 playerId = 0;
