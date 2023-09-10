@@ -118,7 +118,7 @@ VOID SWPacketSquad::Log() {
 	offset += squadLeaderNickSize; //SQUADLEADERNICK
 
 	Log::WriteLogA("At offset %zu", offset);
-	Log::WriteLogA("Skipping past unk02 (4 bytes)");
+	Log::WriteLogA("Skipping past unk02 (12 bytes)");
 	offset += 12; //unk02
 
 	Log::WriteLogA("At offset %zu", offset);
