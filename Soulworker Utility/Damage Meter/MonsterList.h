@@ -90,7 +90,7 @@ static unordered_set<UINT32> endIdList({
 	40301003, // Flemma Hard
 
 	/* CD */
-	44002014, // Beletto Normal P2
+	44002015, // Beletto Normal P2
 	44002011 // Beletto Hard P2
 
 	});
@@ -130,8 +130,26 @@ static unordered_set<UINT32> changeAggroIdList({
 	31365131, 31365132, // Ferdelance Maniac
 
 	/* PM */
-	13901202, 13901302, // Parallel Metronome Noraml
+	13901202, 13901302, // Parallel Metronome Normal
 	13901201, 13901301, // Parallel Metronome Hard
+
+	/* VP */
+	40302003, // Flemma Normal
+	40302002, // Relfenne Normal
+	40302001, // Kain Normal
+	40302005, // Vista Egg Normal
+	40302004, // Vista Egg Hard
+	40301005, // Vista Hard
+	40301004, // Vista Hard
+	40301009, // Fake Vista Hard
+	40301002, // Relfenne Hard
+	40301003, // Flemma Hard
+
+	/* CD */
+	44002014, // Beletto Normal P1
+	44002010, // Beletto Hard P1
+	44002015, // Beletto Normal P2
+	44002011, // Beletto Hard P2
 
 	});
 
