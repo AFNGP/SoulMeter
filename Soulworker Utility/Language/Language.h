@@ -13,7 +13,7 @@ private:
 	vector<string> _notFoundText;
 
 public:
-	Language() : _currentLang("zh_tw.json") {}
+	Language() : _currentLang("jp.json") {}
 
 	const CHAR _langFolder[6] = "Lang/";
 
