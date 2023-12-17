@@ -25,6 +25,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 		{
 			const UINT codePage = GetACP();
 			switch (codePage) {
+			case 932: // JP
+				_wsetlocale(LC_ALL, L"ja-JP.UTF8");
+				errorCode = LANGMANAGER.SetCurrentLang("jp.json");
+				break;
+			case 949:
+				_wsetlocale(LC_ALL, L"ko-KR.UTF8");
+				errorCode = LANGMANAGER.SetCurrentLang("kr.json");
+				break;
 			case 936: // ZH-CN
 			case 950: // ZH-TW
 				_wsetlocale(LC_ALL, L"zh-TW.UTF8");

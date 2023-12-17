@@ -75,6 +75,7 @@
     "STR_OPTION_WINDOWS_NAME": "Option",
     "STR_OPTION_FONTSCALE": "Font Scale",
     "STR_OPTION_FONTSCALE_DESC": "You can scale Table Size by adjusting Font Scale.",
+    "STR_OPTION_MUDFISH": "Enable Mudfish Mode",
     "STR_OPTION_UNIT_1K": "Unit - 1K",
     "STR_OPTION_UNIT_1M": "Unit - 1M",
     "STR_OPTION_SOLO_MODE": "Solo Mode (Only show my data)",

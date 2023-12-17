@@ -10,7 +10,7 @@ MySQL::~MySQL() {
 	FreeDB();
 }
 
-BOOL MySQL::InitDB(){
+BOOL MySQL::InitDB() {
 
 	if (sqlite3_open(SWDBPATH, &_db) != SQLITE_OK) {
 		Log::WriteLogA(const_cast<CHAR*>("Error in InitDB : %s"), sqlite3_errmsg(_db));
@@ -64,7 +64,7 @@ BOOL MySQL::InitSkillDB() {
 
 	CHAR* errbuf = nullptr;
 
-	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Skill(Id INTEGER PRIMARY KEY, Name_TC TEXT NOT NULL, Name_EN TEXT NULL);";
+	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Skill(Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT);";
 
 	if (sqlite3_exec(_db, sql, 0, 0, &errbuf) != SQLITE_OK) {
 		Log::WriteLogA(const_cast<CHAR*>("Error in InitSkillDB : %s"), errbuf);
@@ -73,7 +73,6 @@ BOOL MySQL::InitSkillDB() {
 		return FALSE;
 	}
 
-//	const CHAR* sql2 = "SELECT Name From Skill Where Id = ?";
 	std::string sql2 = string("SELECT Name_") + string(LANGMANAGER.GetText("STR_SQL_SUFFIX")) + " From Skill Where Id = ?";
 
 	if (sqlite3_prepare_v2(_db, sql2.c_str(), -1, &_skill_stmt, 0) != SQLITE_OK) {
@@ -89,8 +88,7 @@ BOOL MySQL::InitMonsterDB() {
 
 	CHAR* errbuf = nullptr;
 
-	//const CHAR* sql = "CREATE TABLE IF NOT EXISTS Monster(Db1 INTEGER, Db2 INTEGER, Name_KR TEXT NOT NULL, PRIMARY KEY(Db1, Db2));";
-	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Monster(Db2 INTEGER, Name_TC TEXT NOT NULL, Name_EN TEXT NULL, PRIMARY KEY(Db2));";
+	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Monster(Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT);";
 
 	if (sqlite3_exec(_db, sql, 0, 0, &errbuf) != SQLITE_OK) {
 		Log::WriteLogA(const_cast<CHAR*>("Error in InitMonsterDB : %s"), errbuf);
@@ -99,8 +97,7 @@ BOOL MySQL::InitMonsterDB() {
 		return FALSE;
 	}
 
-	//std::string sql2 = "SELECT Name_" LANG " From Monster Where Db1 = ? and Db2 = ?";
-	std::string sql2 = "SELECT Name_"s + string(LANGMANAGER.GetText("STR_SQL_SUFFIX")) + ", type From Monster Where Db2 = ?"s;
+	std::string sql2 = "SELECT Name_"s + string(LANGMANAGER.GetText("STR_SQL_SUFFIX")) + ", type From Monster Where Id = ?";
 
 	if (sqlite3_prepare_v2(_db, sql2.c_str(), -1, &_monster_stmt, 0) != SQLITE_OK) {
 		Log::WriteLogA(const_cast<CHAR*>("Error in sqlite3_prepare_v2 : %s"), sqlite3_errmsg(_db));
@@ -114,7 +111,7 @@ BOOL MySQL::InitMonsterDB() {
 BOOL MySQL::InitMapDB() {
 	CHAR* errbuf = nullptr;
 
-	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Map(Id INTEGER PRIMARY KEY, Name_TC TEXT NOT NULL, Name_EN TEXT NULL);";
+	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Map(Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT);";
 
 	if (sqlite3_exec(_db, sql, 0, 0, &errbuf) != SQLITE_OK) {
 		Log::WriteLogA(const_cast<CHAR*>("Error in InitMapDB : %s"), errbuf);
@@ -137,7 +134,7 @@ BOOL MySQL::InitMapDB() {
 BOOL MySQL::InitBuffDB() {
 	CHAR* errbuf = nullptr;
 
-	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Buff (Id INTEGER PRIMARY KEY, Name_EN TEXT NULL, Name_TC TEXT NOT NULL, Desc_EN TEXT NULL, Desc_TC TEXT NOT NULL)";
+	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Buff (Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT, Desc_EN TEXT, Desc_TC TEXT, Desc_JP TEXT, Desc_KR TEXT)";
 
 	if (sqlite3_exec(_db, sql, 0, 0, &errbuf) != SQLITE_OK) {
 		Log::WriteLogA(const_cast<CHAR*>("Error in InitBuffDB : %s"), errbuf);
@@ -287,7 +284,7 @@ BOOL MySQL::GetMonsterType(UINT32 DB2, INT32* type) {
 	return TRUE;
 }
 
-BOOL MySQL::GetMapName(UINT32 mapID, CHAR* out_buffer, SIZE_T out_buffer_length){
+BOOL MySQL::GetMapName(UINT32 mapID, CHAR* out_buffer, SIZE_T out_buffer_length) {
 
 	if (out_buffer == nullptr || _map_stmt == nullptr)
 		return FALSE;
