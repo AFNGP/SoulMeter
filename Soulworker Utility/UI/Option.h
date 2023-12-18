@@ -45,6 +45,7 @@ private:
 	BOOL _isUseSaveData;
 	BOOL _oriIsUseSaveData;
 	CHAR _selectedInterface[MAX_PATH] = { 0 };
+	CHAR _selectedFontFile[MAX_PATH] = { 0 };
 	BOOL _isDontSaveUnfinishedMaze;
 	BOOL _isUpdateCheck;
 
@@ -98,6 +99,7 @@ public:
 	const INT32& GetCaptureMode();
 	const BOOL& isUseSaveData();
 	const CHAR* GetUseInterface();
+	const CHAR* GetFontFile();
 	const BOOL& isDontSaveUnfinishedMaze();
 	const BOOL& isUpdateCheck();
 

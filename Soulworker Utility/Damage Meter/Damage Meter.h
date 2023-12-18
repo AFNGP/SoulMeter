@@ -44,6 +44,13 @@ typedef struct _SW_DB2_STRUCT {
 	INT32 _type;
 }SW_DB2_STRUCT;
 
+struct ImFontObj
+{
+	std::string path;
+	std::string filename;
+	bool selectable = false;
+};
+
 static vector<UINT32> _dwSkills({
 
 	// Haru
@@ -818,6 +825,8 @@ private:
 	BOOL _testMode = FALSE;
 
 public:
+	bool shouldRebuildAtlas = false;
+	ImFontObj selectedFont;
 	SWDamageMeter() :   _myID(0), _worldID(0), _mazeEnd(0), _historyMode(0), _historyWorldID(0), _historyTime(0) {}
 	~SWDamageMeter();
 
