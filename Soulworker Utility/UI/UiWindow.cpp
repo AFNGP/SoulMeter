@@ -152,63 +152,13 @@ BOOL UiWindow::InitImGUI() {
 }
 
 BOOL UiWindow::SetFontList() {
-
-	_finddata_t fd;
-	const char* path = ".\\Font\\";
-	const char* filter = "*.ttf";
-	vector<string> vsFontPathPool;
-
-	string fontDir(path);
-	fontDir.append(filter);
-
-	auto handle = _findfirst(fontDir.c_str(), &fd);
-
+	if (DAMAGEMETER.selectedFont.path.empty())
+		return FALSE;
 	ImGuiIO& io = ImGui::GetIO();
 	ImFontConfig config;
 	config.OversampleH = 1;
 	config.OversampleV = 1;
-
-	if (handle == -1)
-	{
-		char szSysPath[MAX_PATH] = { 0 };
-		if (GetWindowsDirectoryA(szSysPath, MAX_PATH) != 0)
-		{
-			const char* szWindowsFontsDir = "\\Fonts\\";
-			string sFindDefaultFontPath(szSysPath);
-			sFindDefaultFontPath.append(szWindowsFontsDir);
-			sFindDefaultFontPath.append("msjh.*");
-
-			_finddata_t defaultFontFD;
-			auto pFont = _findfirst(sFindDefaultFontPath.c_str(), &defaultFontFD);
-
-			if (pFont != -1)
-			{
-				string fnExt = defaultFontFD.name;
-				if (fnExt.substr(fnExt.find_last_of(".") + 1) == "ttc" || fnExt.substr(fnExt.find_last_of(".") + 1) == "ttf")
-				{
-					sFindDefaultFontPath = szSysPath;
-					sFindDefaultFontPath.append(szWindowsFontsDir);
-					sFindDefaultFontPath.append(defaultFontFD.name);
-					vsFontPathPool.push_back(sFindDefaultFontPath);
-				}
-			}
-		}
-	}
-	else {
-		do {
-			char fontPath[MAX_BUFFER_LENGTH] = { 0 };
-			strcat_s(fontPath, path);
-			strcat_s(fontPath, fd.name);
-
-			vsFontPathPool.push_back(fontPath);
-		} while (_findnext(handle, &fd) != -1);
-
-		_findclose(handle);
-	}
-
-	for (auto itr = vsFontPathPool.begin(); itr != vsFontPathPool.end(); itr++)
-		io.Fonts->AddFontFromFileTTF((*itr).c_str(), 32, &config, io.Fonts->GetGlyphRangesChineseAndKoreaFull());
-
+	ImFont* font = io.Fonts->AddFontFromFileTTF(DAMAGEMETER.selectedFont.path.c_str(), 32, &config, io.Fonts->GetGlyphRangesChineseAndKoreaFull());
 	return TRUE;
 }
 
@@ -230,6 +180,24 @@ VOID UiWindow::Run() {
 }
 
 VOID UiWindow::Update() {
+	if (DAMAGEMETER.shouldRebuildAtlas)
+	{
+		DAMAGEMETER.shouldRebuildAtlas = false;
+		ImGuiIO& io = ImGui::GetIO();
+		ImFontConfig config;
+		config.OversampleH = 1;
+		config.OversampleV = 1;
+		io.Fonts->Clear();
+		ImFont* font = io.Fonts->AddFontFromFileTTF(DAMAGEMETER.selectedFont.path.c_str(), 32, &config, io.Fonts->GetGlyphRangesChineseAndKoreaFull());
+		if (font == nullptr)
+		{
+			Log::WriteLogA("Failed setting font.");
+			return;
+		}
+		ImGui_ImplDX11_InvalidateDeviceObjects();
+		// Log::WriteLogA("Set font to %s", DAMAGEMETER.selectedFont.filename.c_str());
+	}
+
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();

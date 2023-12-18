@@ -1,7 +1,7 @@
 {
 
     "STR_LANG_NAME": "한국어",
-    "STR_SQL_SUFFIX": "EN",
+    "STR_SQL_SUFFIX": "KR",
 
     "STR_WORLD_NO_INFORMATION": "정보 없음",
     "PLAYER_NAME_CANT_FIND": "Unknown",
@@ -73,6 +73,9 @@
     "STR_TABLE_AVG_AS_PERCENT": "평균 공속",
 
     "STR_OPTION_WINDOWS_NAME": "옵션",
+	  "STR_OPTION_FONT": "폰트",
+	  "STR_OPTION_REFRESH_FONTS": "폰트 새로 고침",
+	  "STR_OPTION_SET_FONT": "폰트 설정",
     "STR_OPTION_FONTSCALE": "폰트 크기",
     "STR_OPTION_FONTSCALE_DESC": "폰트 크기를 조정해 테이블 크기를 조정할 수 있습니다.",
     "STR_OPTION_UNIT_1K": "단위 - 1K",

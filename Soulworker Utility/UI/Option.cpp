@@ -3,6 +3,7 @@
 #include <ws2ipdef.h>
 #include <iphlpapi.h>
 #include <stdio.h>
+#include <filesystem>
 #include ".\UI\Option.h"
 #include ".\UI\HotKey.h"
 #include ".\UI\PlayerTable.h"
@@ -17,7 +18,7 @@ UiOption::UiOption()  :
 	_is1K(0), _is1M(0), _isSoloMode(0), _hideName(0), _isTopMost(true), _teamTA_LF(false), _isSoloRankMode(FALSE), _isUseSaveData(FALSE),
 	_isDontSaveUnfinishedMaze(false), _isUpdateCheck(true),
 	_cellPadding(0, 0), _windowWidth(800), _refreshTime((FLOAT)0.3), _captureMode((INT32)CaptureType::_WINDIVERT), _oriIsUseSaveData(FALSE),
-	_selectedInterface("ALL")
+	_selectedInterface("ALL"), _selectedFontFile("NotoSansAll-Bold.ttf")
 {
 	
 	_jobBasicColor[0] = ImVec4(ImGui::ColorConvertU32ToFloat4(ImColor(153, 153, 153, 255)));	// Unknown
@@ -43,7 +44,62 @@ UiOption::~UiOption()
 	
 }
 
+std::vector<ImFontObj> fonts;
+void UpdateFontList()
+{
+	fonts.clear();
+	std::wstring path(L"Font/");
+	try {
+		for (auto& p : std::filesystem::recursive_directory_iterator(path))
+		{
+			if (p.path().extension() == ".ttf" || p.path().extension() == ".ttc")
+			{
+				ImFontObj font;
+				font.path = p.path().generic_u8string();
+				font.filename = p.path().filename().stem().generic_u8string();
+				fonts.emplace_back(font);
+			}
+		}
+	}
+	catch (std::exception e)
+	{
+		Log::WriteLogA("Update font failed: %s", e.what());
+	}
+}
+void SetFont()
+{
+	if (DAMAGEMETER.selectedFont.path.empty())
+		return;
+	DAMAGEMETER.shouldRebuildAtlas = true;
+	// Log::WriteLogA("Trying to set font to: %s", DAMAGEMETER.selectedFont.path.c_str());
+}
+
 BOOL UiOption::ShowFontSelector() {
+
+	float width = ImGui::CalcItemWidth();
+	ImGui::PushItemWidth(width + 100.0);
+	if (ImGui::ListBoxHeader("STR_OPTION_FONT", 3))
+	{
+		for (ImFontObj font : fonts)
+		{
+			if (ImGui::Selectable(font.filename.c_str(), font.selectable))
+			{
+				DAMAGEMETER.selectedFont = font;
+			}
+		}
+		ImGui::ListBoxFooter();
+	}
+	if (ImGui::Button(LANGMANAGER.GetText("STR_OPTION_REFRESH_FONTS")))
+	{
+		UpdateFontList();
+	}
+	ImGui::SameLine();
+	if (ImGui::Button(LANGMANAGER.GetText("STR_OPTION_SET_FONT")))
+	{
+		string fontToSave = DAMAGEMETER.selectedFont.filename + ".ttf";
+		strcpy_s(_selectedFontFile, fontToSave.c_str());
+		SetFont();
+	}
 
 	ImFont* font_current = ImGui::GetFont();
 
@@ -127,7 +183,7 @@ BOOL UiOption::ShowHotkeySetting() {
 	ImGui::Text(text);
 	ImGui::TextAlignCenter::SetTextAlignCenter();
 	{
-		ImGui::Text("\n\n\n\n\\\\AFNGP//");
+		ImGui::Text("\n\n\n\nAFNGP");
 	}
 	ImGui::TextAlignCenter::UnSetTextAlignCenter();
 
@@ -351,6 +407,8 @@ VOID UiOption::OpenOption() {
 			DAMAGEMETER.Suspend();
 		}
 #endif
+		float width = ImGui::CalcItemWidth();
+		ImGui::PushItemWidth(width - 200.0);
 		ShowCaptureModeSelector();
 		ShowInterfaceSelector();
 		ShowLangSelector();
@@ -538,7 +596,15 @@ BOOL UiOption::GetOption() {
 		strcpy_s(_selectedInterface, attr2->GetText());
 	}
 
-	
+	attr2 = ele->FirstChildElement("UseFontFile");
+	if (attr2 != nullptr) {
+		strcpy_s(_selectedFontFile, attr2->GetText());
+		DAMAGEMETER.selectedFont.path = "Font/" + (string) GetFontFile();
+		DAMAGEMETER.selectedFont.filename = GetFontFile();
+		DAMAGEMETER.selectedFont.selectable = true;
+		SetFont();
+	}
+
 	attr = ele->FindAttribute("IsDontSaveUnfinishedMaze");
 	if (attr != nullptr)
 		attr->QueryIntValue(&_isDontSaveUnfinishedMaze);
@@ -915,6 +981,8 @@ BOOL UiOption::SaveOption(BOOL skipWarning) {
 
 	option->InsertNewChildElement("UseInterface")->SetText(_selectedInterface);
 
+	option->InsertNewChildElement("UseFontFile")->SetText(_selectedFontFile);
+
 	option->SetAttribute("IsDontSaveUnfinishedMaze", _isDontSaveUnfinishedMaze);
 
 	RECT rect;
@@ -1168,4 +1236,8 @@ const FLOAT& UiOption::GetRefreshTime() {
 
 const CHAR* UiOption::GetUseInterface() {
 	return _selectedInterface;
+}
+
+const CHAR* UiOption::GetFontFile() {
+	return _selectedFontFile;
 }
