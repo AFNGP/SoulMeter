@@ -400,11 +400,15 @@ VOID PlayerTable::UpdateTable(FLOAT windowWidth) {
 		}
 		else {
 			DOUBLE dps = ((DOUBLE)(*itr)->GetDamage()) / _tableTime;
-			if (UIOPTION.is1K())
+			if (UIOPTION.is1K()) {
 				dps /= 1000;
-			else if (UIOPTION.is1M())
+				sprintf_s(label, 128, "%.0lf", dps);
+			}
+			else if (UIOPTION.is1M()) {
 				dps /= 1000000;
-			sprintf_s(label, 128, "%.0lf", dps);
+				sprintf_s(label, 128, "%.1lf", dps);
+			}
+			else sprintf_s(label, 128, "%.0lf", dps);
 			TextCommma(label, comma);
 			if (UIOPTION.is1K())
 				strcat_s(comma, 128, "K");
