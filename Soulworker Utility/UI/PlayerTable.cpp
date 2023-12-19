@@ -400,21 +400,26 @@ VOID PlayerTable::UpdateTable(FLOAT windowWidth) {
 		}
 		else {
 			DOUBLE dps = ((DOUBLE)(*itr)->GetDamage()) / _tableTime;
-			if (UIOPTION.is1K()) {
+			if (UIOPTION.is1K()) 
 				dps /= 1000;
-				sprintf_s(label, 128, "%.0lf", dps);
-			}
-			else if (UIOPTION.is1M()) {
+			else if (UIOPTION.is1M()) 
 				dps /= 1000000;
-				sprintf_s(label, 128, "%.1lf", dps);
-			}
-			else sprintf_s(label, 128, "%.0lf", dps);
+			else if (UIOPTION.is10K())
+				dps /= 10000;
+			sprintf_s(label, 128, "%.0lf", dps);
 			TextCommma(label, comma);
 			if (UIOPTION.is1K())
-				strcat_s(comma, 128, "K");
-			else if (UIOPTION.is1M())
-				strcat_s(comma, 128, "M");
+				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1K"));
+			else if (UIOPTION.is1M()) {
+				comma[strlen(comma)] = '.';
+				comma[strlen(comma)] = (char)('0' + (int(dps * 10) % 10));
+				comma[strlen(comma)] = '\0';
+				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1M"));
+			}
+			else if (UIOPTION.is10K())
+				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_10K"));
 			ImGui::Text(comma);
+			memset(comma, 0, sizeof(comma));
 
 			bool isFirstElement = ((itr - DAMAGEMETER.begin()) == 0);
 			PLOTWINDOW.AddData((*itr)->GetID(), DAMAGEMETER.GetPlayerName((*itr)->GetID()), dps, _tableTime, isFirstElement);
@@ -441,12 +446,16 @@ VOID PlayerTable::UpdateTable(FLOAT windowWidth) {
 			damage /= 1000;
 		else if (UIOPTION.is1M())
 			damage /= 1000000;
+		else if (UIOPTION.is10K())
+			damage /= 10000;
 		sprintf_s(label, 128, "%llu", damage);
 		TextCommma(label, comma);
 		if (UIOPTION.is1K())
-			strcat_s(comma, 128, "K");
+			strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1K"));
 		else if (UIOPTION.is1M())
-			strcat_s(comma, 128, "M");
+			strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1M"));
+		else if (UIOPTION.is10K())
+			strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_10K"));
 		ImGui::Text(comma);
 
 		ImGui::TableNextColumn();
@@ -555,17 +564,32 @@ VOID PlayerTable::UpdateTable(FLOAT windowWidth) {
 		}
 		else {
 			// Attack+Crit SUM
+			// TODO: Re-enable M option if we ever get there 
 			DOUBLE gongchihap = (DOUBLE)playerMetaData->GetStat(StatType::MaxAttack) + (DOUBLE)playerMetaData->GetStat(StatType::CritDamage);
 			if (UIOPTION.is1K())
 				gongchihap /= 1000;
-			else if (UIOPTION.is1M())
-				gongchihap /= 1000000;
+			else if (UIOPTION.is1M()) {
+				if (!strcmp(LANGMANAGER.GetText("STR_DISPLAY_DEFAULT_UNIT"), "K"))
+					gongchihap /= 1000;
+				else if (!strcmp(LANGMANAGER.GetText("STR_DISPLAY_DEFAULT_UNIT"), "10K"))
+					gongchihap /= 10000;
+				// gongchihap /= 1000000
+			}
+			else if (UIOPTION.is10K())
+				gongchihap /= 10000;
 			sprintf_s(label, 128, "%.0f", gongchihap);
 			TextCommma(label, comma);
 			if (UIOPTION.is1K())
-				strcat_s(comma, 128, "K");
-			else if (UIOPTION.is1M())
-				strcat_s(comma, 128, "M");
+				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1K"));
+			else if (UIOPTION.is1M()) {
+				if (!strcmp(LANGMANAGER.GetText("STR_DISPLAY_DEFAULT_UNIT"), "K"))
+					strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1K"));
+				else if (!strcmp(LANGMANAGER.GetText("STR_DISPLAY_DEFAULT_UNIT"), "10K"))
+					strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_10K"));
+				// strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1M"));
+			}
+			else if (UIOPTION.is10K())
+				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_10K"));
 			ImGui::Text(comma);
 			ImGui::TableNextColumn();
 
@@ -942,6 +966,7 @@ VOID PlayerTable::UpdateTable(FLOAT windowWidth) {
 		}
 
 		// HP
+		// TODO: Re-enable M if we ever get there
 		DOUBLE losedHP = 0.0;
 		if (DAMAGEMETER.isHistoryMode()) {
 			losedHP = (*itr)->GetHistoryLosedHP();
@@ -951,15 +976,30 @@ VOID PlayerTable::UpdateTable(FLOAT windowWidth) {
 		}
 		if (UIOPTION.is1K())
 			losedHP /= 1000;
-		else if (UIOPTION.is1M())
-			losedHP /= 1000000;
+		else if (UIOPTION.is1M()) {
+			if (!strcmp(LANGMANAGER.GetText("STR_DISPLAY_DEFAULT_UNIT"), "K"))
+				losedHP /= 1000;
+			else if (!strcmp(LANGMANAGER.GetText("STR_DISPLAY_DEFAULT_UNIT"), "10K"))
+				losedHP /= 10000;
+			// losedHP /= 1000000;
+		}
+		else if (UIOPTION.is10K())
+			losedHP /= 10000;
 		sprintf_s(label, 128, "%.0f", losedHP);
 		TextCommma(label, comma);
 
 		if (UIOPTION.is1K())
-			strcat_s(comma, 128, "K");
+			strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1K"));
 		else if (UIOPTION.is1M())
-			strcat_s(comma, 128, "M");
+		{
+			if (!strcmp(LANGMANAGER.GetText("STR_DISPLAY_DEFAULT_UNIT"), "K"))
+				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1K"));
+			else if (!strcmp(LANGMANAGER.GetText("STR_DISPLAY_DEFAULT_UNIT"), "10K"))
+				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_10K"));
+			// strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1M"));
+		}
+		else if (UIOPTION.is10K())
+			strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_10K"));
 
 		ImGui::Text(comma);
 		ImGui::TableNextColumn();
