@@ -15,7 +15,7 @@
 
 UiOption::UiOption()  : 
 	_open(0), _framerate(1), _windowBorderSize(1), _fontScale(1), _columnFontScale(1), _tableFontScale(1), 
-	_is1K(0), _is1M(0), _isSoloMode(0), _hideName(0), _isTopMost(true), _teamTA_LF(false), _isSoloRankMode(FALSE), _isUseSaveData(FALSE),
+	_is1K(0), _is1M(0), _is10K(0), _isSoloMode(0), _hideName(0), _isTopMost(true), _teamTA_LF(false), _isSoloRankMode(FALSE), _isUseSaveData(FALSE),
 	_isDontSaveUnfinishedMaze(false), _isUpdateCheck(true),
 	_cellPadding(0, 0), _windowWidth(800), _refreshTime((FLOAT)0.3), _captureMode((INT32)CaptureType::_WINDIVERT), _oriIsUseSaveData(FALSE),
 	_selectedInterface("ALL"), _selectedFontFile("NotoSansAll-Bold.ttf")
@@ -78,7 +78,7 @@ BOOL UiOption::ShowFontSelector() {
 
 	float width = ImGui::CalcItemWidth();
 	ImGui::PushItemWidth(width + 100.0);
-	if (ImGui::ListBoxHeader("STR_OPTION_FONT", 3))
+	if (ImGui::ListBoxHeader(LANGMANAGER.GetText("STR_OPTION_FONT"), 3))
 	{
 		for (ImFontObj font : fonts)
 		{
@@ -352,13 +352,18 @@ VOID UiOption::ShowInterfaceSelector() {
 VOID UiOption::ShowFeatures()
 {
 	if (ImGui::Checkbox(LANGMANAGER.GetText("STR_OPTION_UNIT_1K"), (bool*)&_is1K)) {
-		if (_is1M)
-			_is1M = FALSE;
+		_is1M = FALSE;
+		_is10K = FALSE;
 	}
 
 	if (ImGui::Checkbox(LANGMANAGER.GetText("STR_OPTION_UNIT_1M"), (bool*)&_is1M)) {
-		if (_is1K)
-			_is1K = FALSE;
+		_is1K = FALSE;
+		_is10K = FALSE;
+	}
+
+	if (ImGui::Checkbox(LANGMANAGER.GetText("STR_OPTION_UNIT_10K"), (bool*)&_is10K)) {
+		_is1K = FALSE;
+		_is1M = FALSE;
 	}
 	ImGui::Checkbox(LANGMANAGER.GetText("STR_OPTION_SOLO_MODE"), (bool*)&_isSoloMode);
 	ImGui::Checkbox(LANGMANAGER.GetText("STR_OPTION_HIDE_NAME"), (bool*)&_hideName);
@@ -542,6 +547,12 @@ BOOL UiOption::GetOption() {
 		return FALSE;
 
 	attr->QueryIntValue(&_is1M);
+
+	attr = ele->FindAttribute("Man");
+
+	if (attr == nullptr)
+		return FALSE;
+	attr->QueryIntValue(&_is10K);
 
 	attr = ele->FindAttribute("IsSoloMode");
 	if (attr == nullptr)
@@ -961,6 +972,7 @@ BOOL UiOption::SaveOption(BOOL skipWarning) {
 	option->SetAttribute("ColumnScale", _columnFontScale);
 	option->SetAttribute("K", _is1K);
 	option->SetAttribute("M", _is1M);
+	option->SetAttribute("Man", _is10K);
 	option->SetAttribute("IsSoloMode", _isSoloMode);
 	option->SetAttribute("DoHideName", _hideName);
 	option->SetAttribute("TeamTA_LF", _teamTA_LF);
@@ -1139,6 +1151,10 @@ const BOOL& UiOption::is1K() {
 
 const BOOL& UiOption::is1M() {
 	return _is1M;
+}
+
+const BOOL& UiOption::is10K() {
+	return _is10K;
 }
 
 const BOOL& UiOption::isSoloMode(){
