@@ -406,20 +406,19 @@ VOID PlayerTable::UpdateTable(FLOAT windowWidth) {
 				dps /= 1000000;
 			else if (UIOPTION.is10K())
 				dps /= 10000;
-			sprintf_s(label, 128, "%.0lf", dps);
-			TextCommma(label, comma);
+			if (UIOPTION.is1M()) 
+				TextCommmaIncludeDecimal(dps, sizeof(comma), comma);
+			else {
+				sprintf_s(label, 128, "%.0lf", dps);
+				TextCommma(label, comma);
+			}
 			if (UIOPTION.is1K())
 				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1K"));
-			else if (UIOPTION.is1M()) {
-				comma[strlen(comma)] = '.';
-				comma[strlen(comma)] = (char)('0' + (int(dps * 10) % 10));
-				comma[strlen(comma)] = '\0';
+			else if (UIOPTION.is1M()) 
 				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1M"));
-			}
 			else if (UIOPTION.is10K())
 				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_10K"));
 			ImGui::Text(comma);
-			memset(comma, 0, sizeof(comma));
 
 			bool isFirstElement = ((itr - DAMAGEMETER.begin()) == 0);
 			PLOTWINDOW.AddData((*itr)->GetID(), DAMAGEMETER.GetPlayerName((*itr)->GetID()), dps, _tableTime, isFirstElement);

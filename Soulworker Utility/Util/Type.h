@@ -84,11 +84,11 @@ inline BOOL TextCommmaIncludeDecimal(_In_ DOUBLE src, _In_ size_t destLen, _Out_
 	char tmp[128] = { 0 };
 	char comma[128] = { 0 };
 	DOUBLE whole = floor(src);
-	DOUBLE decimal = (src - whole) * 10;
+	INT decimal = INT((src - whole) * 10) % 10;
 
 	sprintf_s(tmp, "%.0f", whole);
 	TextCommma(tmp, comma);
-	sprintf_s(dest, destLen, "%s.%.0f", comma, decimal);
+	sprintf_s(dest, destLen, "%s.%d", comma, decimal);
 
 	return TRUE;
 }
