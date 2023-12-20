@@ -1,5 +1,82 @@
 # Current Repo
 
+## 1.6.1.0
+- Implement font selector
+- Improve Million unit DPS display by adding one digit after the floating point
+- Implement 10K unit feature for CJK
+- Database fixes (multi-instanced skills and skill order)
+- Fix for second December update
+
+## 1.6.0.0
+- Other languages are now officially supported (CJK)
+- Database revamp to be fully automated
+
+## 1.5.3.1
+- Fix CD Normal not ending in P2
+- Add aggro in VP and CD
+
+## 1.5.3.0
+- Update database to include CD content
+- Fix meter not pausing in VP/CD N/H
+
+## 1.5.2.8 (EN/TC)
+Fix for first December update
+
+## 1.5.2.7 (EN/TC)
+Fix for second November update
+
+## 1.5.2.6 (EN/TC)
+Fix for first November update
+
+## 1.5.2.5 (EN/TC)
+Fix for second October update
+
+## 1.5.2.4 (EN/TC)
+Fix for first October update
+
+## 1.5.2.3
+- Fix for first September update
+- Update DB
+
+## 1.5.2.2
+Fix crashes that occur after VP runs when people start leaving the squad
+
+## 1.5.2.1
+Experimental release:
+- Fixed issues with KR and JP not being updated properly, and updated version
+
+## 1.5.2.0
+Experimental release
+- Attempt to fix VP (EN/KR/JP)
+- Fix for first September update for EN/TC
+
+## 1.5.1.0 (JP)
+Fix party, force, and squad (64 bit release)
+
+## 1.5.1.1 (Boiling)
+Fix meter becoming unresponsive after reticking mudfish option (Boiling)
+
+## 1.5.1.0 (Boiling)
+Added support for Mudfish capture (Boiling)
+
+## 1.5.0.8 (EN/TC)
+Fix for second August update
+
+## 1.5.0.7 (EN/TC)
+Fix for second July update and update DB to include new mazes
+
+## 1.5.0.5 (EN/TC)
+Fix for first July update
+
+## 1.5.0.4 (EN/TC)
+Fix for second June update
+
+## 1.5.0.3 (EN/TC)
+Fix for second May update
+
+## 1.5.0.2 (EN/TC)
+Fix for first May update
+
 ## 1.5.0.1
 Fixed Avg ABU not saving correctly after run
 
@@ -8,10 +85,10 @@ Fixed party, force, and squad crashes in GLB/TC and KR
 Added Tera Fever proc count
 Added uncapped average AB (considers AB values above 100% when calculating the average, useful for Erwin players)
 Each server is managed on its own branch now:
-• JP (Main): https://github.com/AFNGP/SoulMeter
-• KR (KRSW): https://github.com/AFNGP/SoulMeter/tree/KRSW
-• GLB (GLBSW): https://github.com/AFNGP/SoulMeter/tree/GLBSW
-• Boiling (BoilingSW): https://github.com/AFNGP/SoulMeter/tree/BoilingSW
+- JP (Main): https://github.com/AFNGP/SoulMeter
+- KR (KRSW): https://github.com/AFNGP/SoulMeter/tree/KRSW
+- GLB (GLBSW): https://github.com/AFNGP/SoulMeter/tree/GLBSW
+- Boiling (BoilingSW): https://github.com/AFNGP/SoulMeter/tree/BoilingSW
 
 ## 1.4.1.1
 Few string fixes and updated for new Global update
