@@ -273,7 +273,12 @@ VOID SpecificInformation::UpdateSkillTable() {
 				dps /= 10000;
 				sprintf_s(label, 128, "%.0lf", dps);
 			}
-			TextCommma(label, comma);
+			if (UIOPTION.is1M())
+				TextCommmaIncludeDecimal(dps, sizeof(comma), comma);
+			else {
+				sprintf_s(label, 128, "%.0lf", dps);
+				TextCommma(label, comma);
+			}
 			if (UIOPTION.is1K())
 				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1K"));
 			else if (UIOPTION.is1M())
@@ -299,7 +304,12 @@ VOID SpecificInformation::UpdateSkillTable() {
 			else if (UIOPTION.is10K())
 				damage /= 10000;
 			sprintf_s(label, 128, "%llu", damage);
-			TextCommma(label, comma);
+			if (UIOPTION.is1M())
+				TextCommmaIncludeDecimal(damage, sizeof(comma), comma);
+			else {
+				sprintf_s(label, 128, "%.0lf", dps);
+				TextCommma(label, comma);
+			}
 			if (UIOPTION.is1K())
 				strcat_s(comma, 128, LANGMANAGER.GetText("STR_DISPLAY_UNIT_1K"));
 			else if (UIOPTION.is1M())
