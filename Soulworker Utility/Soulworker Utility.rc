@@ -78,12 +78,12 @@ BEGIN
         BLOCK "040404b0"
         BEGIN
             VALUE "FileDescription", "AFN's SoulMeter"
-            VALUE "FileVersion", "1.6.1.0"
+            VALUE "FileVersion", "1.6.2.0"
             VALUE "InternalName", "SoulMeter.exe"
             VALUE "LegalCopyright", "Copyright (C) 2023 AFNGP"
             VALUE "OriginalFilename", "SoulMeter.exe"
             VALUE "ProductName", "SoulMeter"
-            VALUE "ProductVersion", "1.6.1.0"
+            VALUE "ProductVersion", "1.6.2.0"
         END
     END
     BLOCK "VarFileInfo"
