@@ -104,6 +104,10 @@ static unordered_set<UINT32> resumeIgnoreIdList({
 	1081102, 1081103, 1081104, 1081105, 1081106, 1081107, 1081108, 1081109, // Field Octagon(Ephnel)
 	1091101, // Bomb Wick(Nabi)
 
+	/* HH Hero */
+	44002038, 44002031, 44002035, 44002033, 44002052, // Normal
+	44002054, 44002036, 44002033, 44002034, 44002032, // Hard
+
 	});
 
 static unordered_set<UINT32> changeAggroIdList({
@@ -177,8 +181,12 @@ static unordered_set<UINT32> dpsIgnoreIdList({
 
 	/* SKILL */
 	1081102, 1081103, 1081104, 1081105, 1081106, 1081107, 1081108, 1081109, // Field Octagon(Ephnel)
-	1091101 // Bomb Wick(Nabi)
+	1091101, // Bomb Wick(Nabi)
 
+	/* HH Hero */
+	44002038, 44002031, 44002035, 44002033, 44002052, // Normal
+	44002054, 44002036, 44002033, 44002034, 44002032, // Hard
+	
 	});
 
 static unordered_set<UINT32> LunarFallBossListId({
