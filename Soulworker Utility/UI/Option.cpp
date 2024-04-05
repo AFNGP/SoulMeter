@@ -83,7 +83,7 @@ UiOption::~UiOption()
 BOOL UiOption::ShowFontSelector() {
 
 	float width = ImGui::CalcItemWidth();
-	ImGui::PushItemWidth(width + 100.0);
+	ImGui::PushItemWidth(width + 100.0f);
 	if (ImGui::ListBoxHeader(LANGMANAGER.GetText("STR_OPTION_FONT"), 3))
 	{
 		for (ImFontObj font : fonts)
@@ -419,7 +419,7 @@ VOID UiOption::OpenOption() {
 		}
 #endif
 		float width = ImGui::CalcItemWidth();
-		ImGui::PushItemWidth(width - 200.0);
+		ImGui::PushItemWidth(width - 200.0f);
 		ShowCaptureModeSelector();
 		ShowInterfaceSelector();
 		ShowLangSelector();
