@@ -45,7 +45,8 @@ static unordered_set<UINT32> pauseIdList({
 	44002010, // Beletto Hard P1 
 
 	/* VS Hero */
-	31301006
+	31301006, // Flemma P1
+
 	});
 
 static unordered_set<UINT32> endIdList({
@@ -93,7 +94,10 @@ static unordered_set<UINT32> endIdList({
 
 	/* CD */
 	44002015, // Beletto Normal P2
-	44002011 // Beletto Hard P2
+	44002011, // Beletto Hard P2
+
+	/* VS Hero */
+	31301007, // Flemma P2?
 
 	});
 
@@ -109,9 +113,11 @@ static unordered_set<UINT32> resumeIgnoreIdList({
 	/* HH Hero */
 	44002038, 44002031, 44002035, 44002033, 44002052, // Normal
 	44002054, 44002036, 44002033, 44002034, 44002032, // Hard
-
+	
 	/* VS Hero */
-	303031001, 30301002, 30301003, 30301004, 30301005, 30301006, 30301007, 30301008, 30301009, 30301010, 30301011, 30301012, 31301004
+	30301002, 30301004, 30301005, // Tombstone
+	30301007, 30301008, 30301009, 30301010, // Anasyth
+	30301012, // Frost Crystal
 
 	});
 
@@ -160,6 +166,9 @@ static unordered_set<UINT32> changeAggroIdList({
 	44002015, // Beletto Normal P2
 	44002011, // Beletto Hard P2
 
+	/* VS Hero */
+	31301006, 31301007, // Flemma P1, P2
+
 	});
 
 static unordered_set<UINT32> dpsIgnoreIdList({
@@ -193,8 +202,10 @@ static unordered_set<UINT32> dpsIgnoreIdList({
 	44002054, 44002036, 44002033, 44002034, 44002032, // Hard
 
 	/* VS Hero */
-	303031001, 30301002, 30301003, 30301004, 30301005, 30301006, 30301007, 30301008, 30301009, 30301010, 30301011, 30301012, 31301004
-	
+	30301002, 30301004, 30301005, // Tombstone
+	30301007, 30301008, 30301009, 30301010, // Anasyth
+	30301012, // Frost Crystal
+
 	});
 
 static unordered_set<UINT32> LunarFallBossListId({
@@ -283,7 +294,7 @@ static unordered_map<UINT32, vector<UINT32>> StrictModeList({
 	{
 		21031,
 		{
-			31301006
+			31301006, 31301007,
 		}
 	},
 });
