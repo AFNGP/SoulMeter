@@ -16,6 +16,15 @@ static unordered_set<USHORT> rankMap({
 	/* BS */
 	23018,
 
+	/* TF */
+	24019,
+
+	/* CD */
+	25019,
+
+	/* HHH */
+	25022,
+
 	});
 
 static unordered_set<USHORT> townMap({
