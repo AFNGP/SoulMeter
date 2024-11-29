@@ -44,8 +44,11 @@ static unordered_set<UINT32> pauseIdList({
 	44002014, // Beletto Normal P1
 	44002010, // Beletto Hard P1 
 
-	/* VS Hero */
+	/* VS Hero Solo */
 	31301006, // Flemma P1
+
+	/* VS Hero */
+	31301014, // Flemma P1
 
 	});
 
@@ -96,8 +99,11 @@ static unordered_set<UINT32> endIdList({
 	44002015, // Beletto Normal P2
 	44002011, // Beletto Hard P2
 
+	/* VS Hero Solo */
+	31301007, // Flemma P2
+	
 	/* VS Hero */
-	31301007, // Flemma P2?
+	31301015, // Flemma P2
 
 	});
 
@@ -114,10 +120,13 @@ static unordered_set<UINT32> resumeIgnoreIdList({
 	44002038, 44002031, 44002035, 44002033, 44002052, // Normal
 	44002054, 44002036, 44002033, 44002034, 44002032, // Hard
 	
-	/* VS Hero */
+	/* VS Hero Solo */
 	30301002, 30301004, 30301005, // Tombstone
 	30301007, 30301008, 30301009, 30301010, // Anasyth
 	30301012, // Frost Crystal
+
+	/* VS Hero */
+	30301003, 30301006, 30301001, // Tombstone
 
 	});
 
@@ -166,8 +175,11 @@ static unordered_set<UINT32> changeAggroIdList({
 	44002015, // Beletto Normal P2
 	44002011, // Beletto Hard P2
 
-	/* VS Hero */
+	/* VS Hero Solo */
 	31301006, 31301007, // Flemma P1, P2
+
+	/* VS Hero */
+	31301014, 31301015, // Flemma P1, P2
 
 	});
 
@@ -201,10 +213,13 @@ static unordered_set<UINT32> dpsIgnoreIdList({
 	44002038, 44002031, 44002035, 44002033, 44002052, // Normal
 	44002054, 44002036, 44002033, 44002034, 44002032, // Hard
 
-	/* VS Hero */
+	/* VS Hero Solo */
 	30301002, 30301004, 30301005, // Tombstone
 	30301007, 30301008, 30301009, 30301010, // Anasyth
 	30301012, // Frost Crystal
+
+	/* VS Hero */
+	30301003, 30301006, 30301001, // Tombstone
 
 	});
 
@@ -290,11 +305,18 @@ static unordered_map<UINT32, vector<UINT32>> StrictModeList({
 			13901201, 13901301
 		}
 	},
-	// VS Hero
+	// VS Hero Solo
 	{
 		21031,
 		{
 			31301006, 31301007,
+		}
+	},
+	// VS Hero
+	{
+		21032,
+		{
+			31301014, 31301015, 
 		}
 	},
 });
