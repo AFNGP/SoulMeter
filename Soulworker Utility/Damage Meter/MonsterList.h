@@ -33,12 +33,15 @@ static unordered_set<UINT32> pauseIdList({
 	13901202, // Parallel Metronome Normal P1
 	13901201, // Parallel Metronome Hard P1
 
+	/* VP Solo */
+	41301005, // Vista Egg Solo
+
 	/* VP */
 	40302003, // Flemma Normal
 	40302002, // Relfenne Normal
 	40302001, // Kain Normal
 	40302005, // Vista Egg Normal
-	40301004, // Vista Egg Hard
+	40301005, // Vista Egg Hard
 
 	/* CD */
 	44002014, // Beletto Normal P1
@@ -89,8 +92,11 @@ static unordered_set<UINT32> endIdList({
 	13901302, // Parallel Metronome Normal P2
 	13901301, // Parallel Metronome Hard P2
 
+	/* VP Solo */
+	41301004, // Vista Solo
+
 	/* VP */
-	40301005, // Vista Hard
+	40301004, // Vista Hard
 	40301009, // Fake Vista Hard
 	40301002, // Relfenne Hard
 	40301003, // Flemma Hard
@@ -212,6 +218,12 @@ static unordered_set<UINT32> dpsIgnoreIdList({
 	/* HH Hero */
 	44002038, 44002031, 44002035, 44002033, 44002052, // Normal
 	44002054, 44002036, 44002033, 44002034, 44002032, // Hard
+
+	/* VP Solo */
+	41201011, // Wolf P2
+
+	/* VP */
+	40201011, // Wolf P2
 
 	/* VS Hero Solo */
 	30301002, 30301004, 30301005, // Tombstone
