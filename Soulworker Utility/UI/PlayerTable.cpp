@@ -100,7 +100,8 @@ VOID PlayerTable::Update() {
 			LANGMANAGER.GetText("STR_MENU_PING"),
 			_ping,
 			loss,
-			!_isNewestVersion ? LANGMANAGER.GetText("STR_MENU_OUT_OF_DATE") : ""
+			""
+			// !_isNewestVersion ? LANGMANAGER.GetText("STR_MENU_OUT_OF_DATE") : ""
 		);
 
 		ImGui::Begin(title, 0, windowFlag);
