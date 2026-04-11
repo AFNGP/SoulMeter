@@ -51,7 +51,7 @@ public:
 	LONG64 _lastSendTimestamp = 0;
 	LONG64 _ping = 0;
 	UINT32 _tick = 0;
-	BOOL _isNewestVersion = TRUE;
+	BOOL _isNewestVersion = FALSE;
 
 	FLOAT GetTableTime()
 	{
