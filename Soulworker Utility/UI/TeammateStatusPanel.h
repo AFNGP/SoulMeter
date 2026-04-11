@@ -7,7 +7,7 @@ class TeammateStatusPanel : public Singleton<TeammateStatusPanel> {
 private:
 	bool _isOpen = false;
 
-	VOID DrawPlayerRow(LPVOID meta, FLOAT windowWidth);
+	VOID DrawPlayerRow(LPVOID meta, LPVOID player, FLOAT windowWidth);
 
 public:
 	VOID OpenWindow();
