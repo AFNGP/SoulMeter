@@ -723,6 +723,10 @@ public:
 			return _maxAttack;
 		case StatType::CritDamage:
 			return _critDamage;
+		case StatType::CurrentHP:
+			return _currentHP;
+		case StatType::MaxHP:
+			return _maxHP;
 		}
 
 		return -1;

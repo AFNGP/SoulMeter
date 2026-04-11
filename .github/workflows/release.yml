@@ -1,0 +1,116 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read version
+        id: version
+        shell: bash
+        run: echo "version=$(cat VERSION)" >> "$GITHUB_OUTPUT"
+
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      # SWCrypt.dll is not committed. Store it as a base64-encoded GitHub secret
+      # named SWCRYPT_DLL and it will be restored here before the build.
+      - name: Restore SWCrypt.dll
+        shell: pwsh
+        env:
+          SWCRYPT_DLL_B64: ${{ secrets.SWCRYPT_DLL }}
+        run: |
+          if (-not $env:SWCRYPT_DLL_B64) {
+            Write-Error "Secret SWCRYPT_DLL is not set. Encode SWCrypt.dll with: [Convert]::ToBase64String([IO.File]::ReadAllBytes('SWCrypt.dll'))"
+            exit 1
+          }
+          $bytes = [Convert]::FromBase64String($env:SWCRYPT_DLL_B64)
+          [IO.File]::WriteAllBytes("${{ github.workspace }}\Soulworker Utility\SWCrypt.dll", $bytes)
+
+      - name: Build Release x64
+        run: |
+          msbuild "Soulworker Utility.sln" `
+            /p:Configuration=Release `
+            /p:Platform=x64 `
+            /p:PreferredToolArchitecture=x64 `
+            /m `
+            /v:minimal
+
+      - name: Stage release files
+        shell: pwsh
+        run: |
+          $version = "${{ steps.version.outputs.version }}"
+          $stagingDir = "${{ github.workspace }}\staging\SoulMeter $version"
+          New-Item -ItemType Directory -Force -Path $stagingDir | Out-Null
+
+          # Main executable
+          Copy-Item "${{ github.workspace }}\x64\Release\SoulMeter $version.exe" $stagingDir
+
+          # Runtime DLLs committed to repo
+          $srcDir = "${{ github.workspace }}\Soulworker Utility"
+          $dlls = @(
+            'WinDivert.dll',
+            'WinDivert64.sys',
+            'libssl-1_1-x64.dll',
+            'libcrypto-1_1-x64.dll',
+            'sqlite3.dll',
+            'pthreadVC2.dll',
+            'SWCrypt.dll'
+          )
+          foreach ($dll in $dlls) {
+            $src = Join-Path $srcDir $dll
+            if (Test-Path $src) {
+              Copy-Item $src $stagingDir
+            } else {
+              Write-Warning "Not found: $dll"
+            }
+          }
+
+          # Database
+          Copy-Item "$srcDir\SWDB.db" $stagingDir
+
+          # Language files
+          $langDest = Join-Path $stagingDir "Lang"
+          Copy-Item "$srcDir\Lang" $langDest -Recurse
+
+          Write-Host "Staged files:"
+          Get-ChildItem $stagingDir -Recurse | Select-Object FullName
+
+      - name: Create ZIP archive
+        shell: pwsh
+        run: |
+          $version = "${{ steps.version.outputs.version }}"
+          $stagingDir = "${{ github.workspace }}\staging\SoulMeter $version"
+          $zipPath = "${{ github.workspace }}\SoulMeter-$version.zip"
+          Compress-Archive -Path $stagingDir -DestinationPath $zipPath
+          Write-Host "Created: $zipPath"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "SoulMeter ${{ steps.version.outputs.version }}"
+          body: |
+            ## SoulMeter ${{ steps.version.outputs.version }}
+
+            ### Installation
+            1. Extract the ZIP
+            2. Run `SoulMeter ${{ steps.version.outputs.version }}.exe` as Administrator
+            3. WinDivert driver requires administrator privileges for packet capture
+
+            ### Requirements
+            - Windows 10/11 x64
+            - Administrator privileges
+          files: SoulMeter-${{ steps.version.outputs.version }}.zip
+          draft: false
+          prerelease: false

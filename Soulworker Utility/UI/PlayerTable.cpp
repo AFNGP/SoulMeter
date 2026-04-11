@@ -7,6 +7,7 @@
 #include ".\UI\UiWindow.h"
 #include ".\UI\UtillWindow.h"
 #include ".\UI\PlotWindow.h"
+#include ".\UI\TeammateStatusPanel.h"
 #include ".\Soulworker Packet\PacketInfo.h"
 #include ".\Soulworker Packet\SWPacketMaker.h"
 #include ".\Packet Capture\PacketCapture.h"
@@ -92,14 +93,15 @@ VOID PlayerTable::Update() {
 			sprintf_s(loss, 128, "%s: %lld/%lld", LANGMANAGER.GetText("STR_MENU_LOSS"), PACKETCAPTURE.GetLoss(), PACKETCAPTURE.GetAllLoss());
 
 		CHAR title[1024] = { 0 };
-		sprintf_s(title, 1024, "%s - %02d:%02d.%01d [v%s_@AFNGP] %s: %lldms %s %s ###DamageMeter", 
+		sprintf_s(title, 1024, "%s - %02d:%02d.%01d [v%s@TyrantRey] %s: %lldms %s %s ###DamageMeter", 
 			DAMAGEMETER.GetWorldName(), 
 			(UINT)DAMAGEMETER.GetTime() / (60 * 1000), (UINT)(DAMAGEMETER.GetTime() / 1000) % 60, (UINT)DAMAGEMETER.GetTime() % 1000 / 100,
 			APP_VERSION,
 			LANGMANAGER.GetText("STR_MENU_PING"),
 			_ping,
 			loss,
-			!_isNewestVersion ? LANGMANAGER.GetText("STR_MENU_OUT_OF_DATE") : ""
+			""
+			// !_isNewestVersion ? LANGMANAGER.GetText("STR_MENU_OUT_OF_DATE") : ""
 		);
 
 		ImGui::Begin(title, 0, windowFlag);
@@ -125,6 +127,7 @@ VOID PlayerTable::Update() {
 		ImGui::End();
 
 		ShowSelectedTable();
+		TEAMSTATUSPANEL.Update();
 
 		style.WindowPadding.x = prevWindowPadding.x;
 		style.WindowPadding.y = prevWindowPadding.y;
@@ -240,6 +243,10 @@ VOID PlayerTable::BeginPopupMenu() {
 
 		if (ImGui::MenuItem(LANGMANAGER.GetText("STR_MENU_MEOW"))) {
 			PLOTWINDOW.OpenWindow();
+		}
+
+		if (ImGui::MenuItem(LANGMANAGER.GetText("STR_MENU_TEAMMATE_STATUS"))) {
+			TEAMSTATUSPANEL.OpenWindow();
 		}
 
 		if (ImGui::MenuItem(LANGMANAGER.GetText("STR_MENU_OPTIONS"))) {
