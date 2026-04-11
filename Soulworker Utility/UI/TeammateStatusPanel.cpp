@@ -47,10 +47,9 @@ VOID TeammateStatusPanel::DrawPlayerRow(LPVOID pMeta, FLOAT windowWidth) {
 	FLOAT bd = meta->GetSpecialStat(SpecialStatType::BossDamageAddRate);
 	FLOAT as_ = meta->GetStat(StatType::AttackSpeed);
 	FLOAT atk = meta->GetStat(StatType::MaxAttack);
-	FLOAT cd = meta->GetStat(StatType::CritDamage);
 
-	ImGui::Text("AB:%.1f%%  BD:%.1f%%  AS:%.1f%%  ATK:%.0f  CD:%.1f%%",
-		ab, bd, as_, atk, cd);
+	ImGui::Text("AB:%.1f%%  BD:%.1f%%  AS:%.1f%%  ATK:%.0f",
+		ab, bd, as_, atk);
 
 	ImGui::Separator();
 }
