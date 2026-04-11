@@ -1,3 +1,10 @@
+Copyright (c) 2025 TyrantRey
+
+This program is GNU Lesser General Public License (LGPL) Version 3 license.
+For more information, please refer to https://www.gnu.org/licenses/lgpl-3.0.html
+
+The following is a notices about the open source licenses used in this software.
+=======================================================
 Copyright (c) 2022 AFNGP
 
 This program is GNU Lesser General Public License (LGPL) Version 3 license. 

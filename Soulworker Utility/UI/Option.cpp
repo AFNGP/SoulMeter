@@ -189,7 +189,7 @@ BOOL UiOption::ShowHotkeySetting() {
 	ImGui::Text(text);
 	ImGui::TextAlignCenter::SetTextAlignCenter();
 	{
-		ImGui::Text("\n\n\n\nAFNGP");
+		ImGui::Text("\n\n\n\nTyrantRey");
 	}
 	ImGui::TextAlignCenter::UnSetTextAlignCenter();
 

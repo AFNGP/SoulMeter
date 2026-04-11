@@ -35,6 +35,10 @@ VOID SWPacketInInfoMonster::Do() {
 		DAMAGEMETER.InsertOwnerID(pktHeader->id, pktHeader->owner_id);
 		DAMAGEMETER.InsertDB(pktHeader->id, pktHeader->realDB2);
 
+#if _DEBUG
+		Log::WriteLogA("[InInfoMonster] id=%08x db2=%u owner=%08x data1=%d", pktHeader->id, pktHeader->realDB2, pktHeader->owner_id, pktHeader->data1Count);
+#endif
+
 		SWPACKET_IN_INFO_MONSTER2* pktFooter = (SWPACKET_IN_INFO_MONSTER2*)(_data + offset);
 		offset += sizeof(SWPACKET_IN_INFO_MONSTER2);
 		if (pktFooter->data2Count > 0)

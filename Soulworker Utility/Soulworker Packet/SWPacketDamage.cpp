@@ -74,6 +74,9 @@ VOID SWPacketDamage::Do() {
 
 		SW_DB2_STRUCT* db = DAMAGEMETER.GetMonsterDB(monster->_monsterID);
 		UINT32 db2 = 0;
+#if _DEBUG
+		Log::WriteLogA("[Damage] playerID=%08x monsterID=%08x dmg=%u dbFound=%d", player->_playerID, monster->_monsterID, monster->_totalDMG, db != nullptr ? 1 : 0);
+#endif
 		// Don't calc not in db monster
 		if (db != nullptr) {
 			db2 = db->_db2;

@@ -32,7 +32,13 @@ VOID SWPacketStatChange::Do() {
 		if (party_data->_statType >= StatType::END)
 		{
 #if _DEBUG
-			Log::WriteLogA("[SWPacketStatChange] Find Unknown statType = %x, statValue = %f", party_data->_statType, party_data->_statValue);
+			Log::WriteLogA("[SWPacketStatChange] Find Unknown statType = %x, statValue = %f, playerID = %08x, statIdx = %d/%d",
+				party_data->_statType, party_data->_statValue, stat_header->_playerID, i, stat_header->_statsCount);
+			BYTE* raw = (BYTE*)party_data;
+			char hexbuf[sizeof(SWPACKETSTATCHANGE_DATA) * 3 + 1] = {};
+			for (int _i = 0; _i < (int)sizeof(SWPACKETSTATCHANGE_DATA); _i++)
+				sprintf_s(hexbuf + _i * 3, 4, "%02x ", raw[_i]);
+			Log::WriteLogA("[SWPacketStatChange] Raw[%d]: %s", (int)sizeof(SWPACKETSTATCHANGE_DATA), hexbuf);
 #endif
 		}
 		else {

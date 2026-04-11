@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Áú¤å (Áú°ê) resources
+// ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
 LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
@@ -44,12 +44,12 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
-#endif    // Áú¤å (Áú°ê) resources
+#endif    // ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// ¤¤¤å (ÁcÅé¡A¥xÆW) resources
+// ï¿½ï¿½ï¿½ï¿½ (ï¿½cï¿½ï¿½Aï¿½xï¿½W) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
@@ -61,8 +61,8 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,4,0,0
- PRODUCTVERSION 1,4,0,0
+ FILEVERSION 1,7,1,3
+ PRODUCTVERSION 1,7,1,3
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -78,12 +78,12 @@ BEGIN
         BLOCK "040404b0"
         BEGIN
             VALUE "FileDescription", "AFN's SoulMeter"
-            VALUE "FileVersion", "1.7.1.2"
+            VALUE "FileVersion", "1.7.1.3"
             VALUE "InternalName", "SoulMeter.exe"
             VALUE "LegalCopyright", "Copyright (C) 2023 AFNGP"
             VALUE "OriginalFilename", "SoulMeter.exe"
             VALUE "ProductName", "SoulMeter"
-            VALUE "ProductVersion", "1.7.1.2"
+            VALUE "ProductVersion", "1.7.1.3"
         END
     END
     BLOCK "VarFileInfo"
@@ -92,12 +92,12 @@ BEGIN
     END
 END
 
-#endif    // ¤¤¤å (ÁcÅé¡A¥xÆW) resources
+#endif    // ï¿½ï¿½ï¿½ï¿½ (ï¿½cï¿½ï¿½Aï¿½xï¿½W) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// ­^¤å (¬ü°ê) resources
+// ï¿½^ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -112,7 +112,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // remains consistent on all systems.
 IDI_ICON1               ICON                    "meter_icon_1.ico"
 
-#endif    // ­^¤å (¬ü°ê) resources
+#endif    // ï¿½^ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

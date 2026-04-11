@@ -15,7 +15,7 @@ typedef struct _SWPACKETDAMAGE_MONSTER {
 	FLOAT _unknownF1; // 4
 	FLOAT _unknownF2; // 4
 	FLOAT _unknownF3; // 4
-	BYTE _unknown02[22]; // 0605
+	BYTE _unknown02[30]; // 0605 | +8 0411
 }SWPACKETDAMAGE_MONSTER;
 
 typedef struct _SWPACKETDAMAGE_PLAYER {
