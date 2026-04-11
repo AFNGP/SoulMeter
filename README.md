@@ -1,8 +1,4 @@
-# SoulMeter by AFN
-
-## Donate
-
-<a href='https://ko-fi.com/B0B8SC4MT' target='_blank'><img height='50' style='border:0px;height:50px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+# SoulMeter by TyrantRey
 
 ## Information
 
@@ -16,6 +12,7 @@ Currently managed branches:
 - GLB (GLBSW): [https://github.com/AFNGP/SoulMeter/tree/GLBSW](https://github.com/AFNGP/SoulMeter/tree/GLBSW)
 
 Previous contributors:
+- [AFNGP](https://github.com/AFNGP/)
 - [NEON](https://github.com/neonr-0)
 - [ga0321](https://github.com/ga0321)
 - [nyanchii](https://github.com/nyanchii)
