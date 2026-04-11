@@ -7,6 +7,7 @@
 #include ".\UI\UiWindow.h"
 #include ".\UI\UtillWindow.h"
 #include ".\UI\PlotWindow.h"
+#include ".\UI\TeammateStatusPanel.h"
 #include ".\Soulworker Packet\PacketInfo.h"
 #include ".\Soulworker Packet\SWPacketMaker.h"
 #include ".\Packet Capture\PacketCapture.h"
@@ -125,6 +126,7 @@ VOID PlayerTable::Update() {
 		ImGui::End();
 
 		ShowSelectedTable();
+		TEAMSTATUSPANEL.Update();
 
 		style.WindowPadding.x = prevWindowPadding.x;
 		style.WindowPadding.y = prevWindowPadding.y;
@@ -240,6 +242,10 @@ VOID PlayerTable::BeginPopupMenu() {
 
 		if (ImGui::MenuItem(LANGMANAGER.GetText("STR_MENU_MEOW"))) {
 			PLOTWINDOW.OpenWindow();
+		}
+
+		if (ImGui::MenuItem(LANGMANAGER.GetText("STR_MENU_TEAMMATE_STATUS"))) {
+			TEAMSTATUSPANEL.OpenWindow();
 		}
 
 		if (ImGui::MenuItem(LANGMANAGER.GetText("STR_MENU_OPTIONS"))) {

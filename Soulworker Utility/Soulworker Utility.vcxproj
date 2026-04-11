@@ -259,6 +259,7 @@
     <ClInclude Include="UI\PlayerTable.h" />
     <ClInclude Include="UI\PlotWindow.h" />
     <ClInclude Include="UI\SpecificInfomation.h" />
+    <ClInclude Include="UI\TeammateStatusPanel.h" />
     <ClInclude Include="UI\UiWindow.h" />
     <ClInclude Include="UI\UtillWindow.h" />
     <ClInclude Include="Util\CriticalSection.h" />
@@ -346,6 +347,7 @@
     <ClCompile Include="UI\PlayerTable.cpp" />
     <ClCompile Include="UI\PlotWindow.cpp" />
     <ClCompile Include="UI\SpecificInfomation.cpp" />
+    <ClCompile Include="UI\TeammateStatusPanel.cpp" />
     <ClCompile Include="UI\UiWindow.cpp" />
     <ClCompile Include="UI\UtillWindow.cpp" />
     <ClCompile Include="Util\CriticalSection.cpp" />

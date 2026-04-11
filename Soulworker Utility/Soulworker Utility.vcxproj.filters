@@ -207,6 +207,9 @@
     <ClInclude Include="UI\SpecificInfomation.h">
       <Filter>UI\Window\UI</Filter>
     </ClInclude>
+    <ClInclude Include="UI\TeammateStatusPanel.h">
+      <Filter>UI\Window\UI</Filter>
+    </ClInclude>
     <ClInclude Include="Third Party\imgui\Custom.h">
       <Filter>UI\ImGui</Filter>
     </ClInclude>
@@ -471,6 +474,9 @@
       <Filter>UI\DirectX11</Filter>
     </ClCompile>
     <ClCompile Include="UI\SpecificInfomation.cpp">
+      <Filter>UI\Window\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\TeammateStatusPanel.cpp">
       <Filter>UI\Window\UI</Filter>
     </ClCompile>
     <ClCompile Include="Third Party\imgui\Custom.cpp">
