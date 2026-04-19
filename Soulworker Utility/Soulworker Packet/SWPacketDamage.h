@@ -11,10 +11,9 @@ typedef struct _SWPACKETDAMAGE_MONSTER {
 	BYTE _damageType; //1
 	UINT32 _totalDMG; //4
 	UINT32 _soulstoneDMG; // 4
-	UINT32 _remainHP; //4
+	UINT32 _unkonwnI1; //4
 	FLOAT _unknownF1; // 4
-	FLOAT _unknownF2; // 4
-	FLOAT _unknownF3; // 4
+	UINT64 _remainHP; // 8
 	BYTE _unknown02[30];
 }SWPACKETDAMAGE_MONSTER;
 
