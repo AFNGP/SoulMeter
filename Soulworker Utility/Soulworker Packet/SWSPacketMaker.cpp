@@ -30,10 +30,11 @@ VOID SWSPacketMaker::Decrypt(BYTE* data, const UINT size, const UINT start, cons
 		return;
 
 #if USE_XOR == 1
-	UINT _size = size;
-	_size -= sizeof(SWHEADER);
+	if (size <= start)
+		return;
+	UINT _size = size - start;
 	for (UINT i = 0; i < _size; i++) {
-		data[i + start] ^= _keyTable[16 * (keyIndex % 16) + (i & 0xF)];
+		data[i + start] ^= _keyTable[16 * (keyIndex & 0xF) + (i & 0xF)];
 	}
 #else
 	SWCRYPT.SWDecrypt(data + start, size - start, keyIndex, FALSE);
