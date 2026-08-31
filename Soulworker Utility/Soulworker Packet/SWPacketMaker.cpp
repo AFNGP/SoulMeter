@@ -32,10 +32,11 @@ VOID SWPacketMaker::Decrypt(BYTE* data, const UINT size, const UINT start, const
 		return;
 
 #if USE_XOR == 1
-	UINT32 _size = size;
-	_size -= sizeof(SWHEADER) + 3;
+	if (size <= start)
+		return;
+	UINT32 _size = size - start;
 	for (UINT i = 0; i < _size; i++) {
-		data[i + start] ^= _keyTable[16 * (keyIndex % 16) + (i & 0xF)];
+		data[i + start] ^= _keyTable[16 * (keyIndex & 0xF) + (i & 0xF)];
 	}
 #else
 	SWCRYPT.SWDecrypt(data + start, size - start, keyIndex, TRUE);
