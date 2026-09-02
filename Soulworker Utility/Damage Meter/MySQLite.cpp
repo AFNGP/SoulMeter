@@ -64,7 +64,7 @@ BOOL MySQL::InitSkillDB() {
 
 	CHAR* errbuf = nullptr;
 
-	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Skill(Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT);";
+	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Skill(Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT, Name_CN TEXT);";
 
 	if (sqlite3_exec(_db, sql, 0, 0, &errbuf) != SQLITE_OK) {
 		Log::WriteLogA(const_cast<CHAR*>("Error in InitSkillDB : %s"), errbuf);
@@ -88,7 +88,7 @@ BOOL MySQL::InitMonsterDB() {
 
 	CHAR* errbuf = nullptr;
 
-	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Monster(Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT);";
+	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Monster(Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT, Name_CN TEXT);";
 
 	if (sqlite3_exec(_db, sql, 0, 0, &errbuf) != SQLITE_OK) {
 		Log::WriteLogA(const_cast<CHAR*>("Error in InitMonsterDB : %s"), errbuf);
@@ -111,7 +111,7 @@ BOOL MySQL::InitMonsterDB() {
 BOOL MySQL::InitMapDB() {
 	CHAR* errbuf = nullptr;
 
-	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Map(Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT);";
+	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Map(Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT, Name_CN TEXT);";
 
 	if (sqlite3_exec(_db, sql, 0, 0, &errbuf) != SQLITE_OK) {
 		Log::WriteLogA(const_cast<CHAR*>("Error in InitMapDB : %s"), errbuf);
@@ -134,7 +134,7 @@ BOOL MySQL::InitMapDB() {
 BOOL MySQL::InitBuffDB() {
 	CHAR* errbuf = nullptr;
 
-	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Buff (Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT, Desc_EN TEXT, Desc_TC TEXT, Desc_JP TEXT, Desc_KR TEXT)";
+	const CHAR* sql = "CREATE TABLE IF NOT EXISTS Buff (Id INTEGER PRIMARY KEY, Name_EN TEXT, Name_TC TEXT, Name_JP TEXT, Name_KR TEXT, Name_CN TEXT, Desc_EN TEXT, Desc_TC TEXT, Desc_JP TEXT, Desc_KR TEXT, Desc_CN TEXT)";
 
 	if (sqlite3_exec(_db, sql, 0, 0, &errbuf) != SQLITE_OK) {
 		Log::WriteLogA(const_cast<CHAR*>("Error in InitBuffDB : %s"), errbuf);
