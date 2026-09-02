@@ -7,6 +7,7 @@
 #include ".\SWCrypt\SWCryptDLL.h"
 #include ".\Damage Meter\SaveData.h"
 #include ".\Packet Capture\PacketParser.h"
+#include "SWConfig.h"
 
 #if defined(DEBUG) || defined(_DEBUG)
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console" )
@@ -52,10 +53,12 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 				break;
 			}
 
+#if USE_XOR == 0
 			if ((errorCode = SWCRYPT.LoadSWCrypt())) {
 				sprintf_s(errorMsg, "Load SWCrypt.dll failed, err: %lu", errorCode);
 				break;
 			}
+#endif
 
 			if (!SWDB.Init()) {
 				sprintf_s(errorMsg, "Init database failed.");

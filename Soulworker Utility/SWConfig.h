@@ -4,4 +4,4 @@
 #define SWMAGIC 50
 #define SWCONSTVALUE_RECV 1
 #define SWCONSTVALUE_SEND 2 // maybe client send request
-#define USE_XOR 0
+#define USE_XOR 1
