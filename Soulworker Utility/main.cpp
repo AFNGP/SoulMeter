@@ -34,6 +34,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 				errorCode = LANGMANAGER.SetCurrentLang("kr.json");
 				break;
 			case 936: // ZH-CN
+				_wsetlocale(LC_ALL, L"zh-CN.UTF8");
+				errorCode = LANGMANAGER.SetCurrentLang("zh_cn.json");
+				break;
 			case 950: // ZH-TW
 				_wsetlocale(LC_ALL, L"zh-TW.UTF8");
 				errorCode = LANGMANAGER.SetCurrentLang("zh_tw.json");
