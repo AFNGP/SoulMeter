@@ -53,6 +53,10 @@ static unordered_set<UINT32> pauseIdList({
 	/* VS Hero */
 	31301014, // Flemma P1
 
+	/* Hired Muscle */
+	31350366, // Clive
+	31350367, // Unknown
+
 	});
 
 static unordered_set<UINT32> endIdList({
@@ -110,6 +114,9 @@ static unordered_set<UINT32> endIdList({
 	
 	/* VS Hero */
 	31301015, // Flemma P2
+
+	/* Hired Muscle */
+	31350368, // Huff
 
 	});
 
@@ -329,6 +336,13 @@ static unordered_map<UINT32, vector<UINT32>> StrictModeList({
 		21032,
 		{
 			31301014, 31301015, 
+		}
+	},
+	// Hired Muscle - Clive / Unknown / Huff, one per gate
+	{
+		21038,
+		{
+			31350366, 31350367, 31350368
 		}
 	},
 });
