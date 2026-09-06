@@ -1,6 +1,6 @@
 #pragma once
 
-#define APP_VERSION "1.7.2.0"
+#define APP_VERSION "1.7.2.1"
 #define SWMAGIC 50
 #define SWCONSTVALUE_RECV 1
 #define SWCONSTVALUE_SEND 2 // maybe client send request
