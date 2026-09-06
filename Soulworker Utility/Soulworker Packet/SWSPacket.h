@@ -2,11 +2,13 @@
 
 #pragma pack(push, 1)
 
-typedef struct _SWSHEADER {
+typedef struct _SWSHEADER { // 14
 	USHORT _magic;
 	USHORT _size;
 	UCHAR _const_value01;
 	UCHAR key;
+	UCHAR _mode;
+	UINT32 _nonce;
 	USHORT _op;
 	UCHAR unk01;
 } SWSHEADER;

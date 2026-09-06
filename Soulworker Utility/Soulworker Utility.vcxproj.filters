@@ -138,6 +138,9 @@
     <ClInclude Include="Soulworker Packet\PacketType.h">
       <Filter>SWPacket\헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Soulworker Packet\SWPacketCrypt.h">
+      <Filter>SWPacket\헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="Soulworker Packet\SWPacketMaker.h">
       <Filter>SWPacket\헤더 파일</Filter>
     </ClInclude>

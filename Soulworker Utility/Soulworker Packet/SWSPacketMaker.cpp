@@ -4,6 +4,7 @@
 #include ".\Packet Capture\PacketParser.h"
 #include ".\UI\PlayerTable.h"
 #include ".\SWCrypt\SWCryptDLL.h"
+#include ".\Soulworker Packet\SWPacketCrypt.h"
 #include "SWConfig.h"
 
 SWSHEADER* SWSPacketMaker::GetSWSHeader(IPv4Packet* packet) {
@@ -32,10 +33,7 @@ VOID SWSPacketMaker::Decrypt(BYTE* data, const UINT size, const UINT start, cons
 #if USE_XOR == 1
 	if (size <= start)
 		return;
-	UINT _size = size - start;
-	for (UINT i = 0; i < _size; i++) {
-		data[i + start] ^= _keyTable[16 * (keyIndex & 0xF) + (i & 0xF)];
-	}
+	SWDecryptBody(data, data + start, size - start, _keyTable);
 #else
 	SWCRYPT.SWDecrypt(data + start, size - start, keyIndex, FALSE);
 #endif
